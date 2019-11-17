@@ -41,8 +41,8 @@ function bindListeners() {
         resultUs = $('#result_us').text();
         hashtags = $('#hastags').text();
     
-        $('#result').text(introFr + "\n" + resultFr + "\n" + closingTextFr + "\n"
-            + introUs + "\n" + resultUs + closingTextUs + "\n\n" + hashtags);
+        $('#result').text(introFr + "\n" + resultFr + "\n" + closingTextFr + "\n\n"
+            + introUs + "\n" + resultUs + "\n" + closingTextUs + "\n\n" + hashtags);
             $('#result').select();
     });
 

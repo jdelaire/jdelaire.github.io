@@ -40,5 +40,132 @@ var model = [
         "display": "Tuna 🎣 (prot)",
         "display_fr": "Thon 🎣 (protéines)",
         "display_us": "Tuna 🎣 (prot)"
+    },
+    {
+        "id" : "8",
+        "display": "Salmon 🐠(prot)",
+        "display_fr": "Saumon 🐠(protéines)",
+        "display_us": "Salmon 🐠(prot)"
+    },
+    {
+        "id" : "9",
+        "display": "Chicken with soy sauce 🍗 (prot)",
+        "display_fr": "Poulet à la sauce soja 🍗 (protéines)",
+        "display_us": "Chicken with soy sauce 🍗 (prot)"
+    },
+    {
+        "id" : "10",
+        "display": "Cucumber 🥒 (micro)",
+        "display_fr": "Concombre 🥒 (légumes)",
+        "display_us": "Cucumber 🥒 (micro)"
+    },
+    {
+        "id" : "11",
+        "display": "Red onions (micro)",
+        "display_fr": "Oignons rouge (légumes)",
+        "display_us": "Red onions (micro)"
+    },
+    {
+        "id" : "12",
+        "display": "Cherry tomatoes 🍅 (veggies)",
+        "display_fr": "Tomates cerise 🍅 (légumes)",
+        "display_us": "Cherry tomatoes 🍅 (veggies)"
+    },
+    {
+        "id" : "13",
+        "display": "Tomatoes 🍅 (veggies)",
+        "display_fr": "Tomates 🍅 (légumes)",
+        "display_us": "Tomatoes 🍅 (veggies)"
+    },
+    {
+        "id" : "14",
+        "display": "Dried tomatoes 🍅 (veggies)",
+        "display_fr": "Tomates  séchée 🍅 (légumes)",
+        "display_us": "Dried tomatoes 🍅 (veggies)"
+    },
+    {
+        "id" : "15",
+        "display": "Yellow pepper 🌶 (veggies)",
+        "display_fr": "Poivron jaune 🌶 (légumes)",
+        "display_us": "Yellow pepper 🌶 (veggies)"
+    },
+    {
+        "id" : "16",
+        "display": "Red pepper 🌶 (veggies)",
+        "display_fr": "Poivron rouge 🌶 (légumes)",
+        "display_us": "Red pepper 🌶 (veggies)"
+    },
+    {
+        "id" : "17",
+        "display": "Red pepper 🌶 (veggies)",
+        "display_fr": "Poivron rouge 🌶 (légumes)",
+        "display_us": "Red pepper 🌶 (veggies)"
+    },
+    {
+        "id" : "18",
+        "display": "Chili pepper mash 🌶 (taste boost)",
+        "display_fr": "Purée de piment 🌶 (booster de goût)",
+        "display_us": "Chili pepper mash 🌶 (taste boost)"
+    },
+    {
+        "id" : "19",
+        "display": "Corn 🌽 (carb)",
+        "display_fr": "Maïs 🌽 (glucides)",
+        "display_us": "Corn 🌽 (carb)"
+    },
+    {
+        "id" : "20",
+        "display": "Brocolis 🥦 (veggies)",
+        "display_fr": "Broccolis 🥦 (légumes)",
+        "display_us": "Brocolis 🥦 (veggies)"
+    },
+    {
+        "id" : "21",
+        "display": "Chickpeas (prot+carb)",
+        "display_fr": "Pois chiche (protéines/glucides)",
+        "display_us": "Chickpeas (prot+carb)"
+    },
+    {
+        "id" : "22",
+        "display": "Lime 🍋 (micro)",
+        "display_fr": "Citron 🍋 (micro)",
+        "display_us": "Lime 🍋 (micro)"
+    },
+    {
+        "id" : "23",
+        "display": "Sesame oil 🍃 (fat)",
+        "display_fr": "Huile de sésame 🍃 (gras)",
+        "display_us": "Sesame oil 🍃 (fat)"
+    },
+    {
+        "id" : "24",
+        "display": "Pesto verde (fat)",
+        "display_fr": "Pesto vert (gras)",
+        "display_us": "Pesto verde (fat)"
+    },
+    {
+        "id" : "25",
+        "display": "Parsley 🍀 (micro)",
+        "display_fr": "Persil 🍀 (micro)",
+        "display_us": "Parsley 🍀 (micro)"
+    },
+    {
+        "id" : "26",
+        "display": "Avocado oil  🥑 (fat)",
+        "display_fr": "Huile d'avocat 🥑 (gras)",
+        "display_us": "Avocado oil  🥑 (fat)"
+    },
+    {
+        "id" : "27",
+        "display": "Avocado 🥑 (fat)",
+        "display_fr": "Avocat 🥑 (gras)",
+        "display_us": "Avocado 🥑 (fat)"
+    },
+    {
+        "id" : "28",
+        "display": "Mustard 🍯 (taste boost)",
+        "display_fr": "Moutarde 🍯 (gout)",
+        "display_us": "Mustard 🍯 (tastte boost)"
     }
+    
 ]

@@ -43,7 +43,12 @@ function bindListeners() {
     
         $('#result').text(introFr + "\n" + resultFr + "\n" + closingTextFr + "\n"
             + introUs + "\n" + resultUs + closingTextUs + "\n\n" + hashtags);
-    })
+            $('#result').select();
+    });
+
+    $('#reset').bind("click", function() {
+        $('#result').text("");
+    });
 }
 
 

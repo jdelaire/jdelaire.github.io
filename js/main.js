@@ -6,6 +6,15 @@ function initApp() {
     });
     $('#selectList').html(items);
     bindListeners();
+    fillFromTemplate("bowl");
+}
+
+function getHashTags(hashtag) {
+    url = "https://query.displaypurposes.com/tag/" + hashtag;
+    $.get(url, function( data ) {
+        result = data;
+        console.log(data)
+      });
 }
 
 function retrieveItem(index) {
@@ -17,6 +26,16 @@ function retrieveItem(index) {
         }
     });
     return foundItem;
+}
+
+function fillFromTemplate(templateName) {
+    selectedTemplate = templates[templateName];
+    console.log(selectedTemplate);
+    $('#intro_text_fr').text(selectedTemplate.intro_fr);
+    $('#intro_text_us').text(selectedTemplate.intro_us);
+    $('#closing_text_fr').text(selectedTemplate.closing_fr);
+    $('#closing_text_us').text(selectedTemplate.closing_us);
+    $('#hastags').text(selectedTemplate.hashtags);
 }
 
 function bindListeners() {
@@ -48,6 +67,8 @@ function bindListeners() {
 
     $('#reset').bind("click", function() {
         $('#result').text("");
+        $('#result_fr').text("");
+        $('#result_us').text("");
     });
 }
 

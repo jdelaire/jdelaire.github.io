@@ -174,7 +174,7 @@ var templates = {
     "bowl" : {
         "intro_fr" : "🇫🇷[série des bols] Mélanger dans un bol:",
         "intro_us" : "🇺🇸[bowls series] Mix in a bowl:",
-        "closing_fr" : "Le tout bio 👌🏻 enjoy! Curieux des accessoires que j’utilise pour cuisiner ces repas, le liens est sur mon profils!",
+        "closing_fr" : "Le tout bio 👌🏻 enjoy! Curieux des accessoires que j’utilise pour cuisiner ces repas, le lien est sur mon profil!",
         "closing_us" : "All organic 👌🏻 enjoy!",
         "hashtags" : "#crossfit #mealprep #fitfrenchies #wod #foodprep #musculation #teamshape #mealplan #tbc #topbodychallenge #reequilibragealimentaire #weightlifting #regimeuse #muscu #mealprepsunday #crossfitgirls #powerlifting #regime #mealprepping #crossfitter #macros #protein #crossfitgames #mealprepmonday #nutrition #instaregimeuse #cleaneating #pertedepoids #flexibledieting #topbodychallengeuse"
     }

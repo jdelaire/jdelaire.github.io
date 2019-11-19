@@ -6,7 +6,6 @@ function initApp() {
     });
     $('#selectList').html(items);
     bindListeners();
-    fillFromTemplate("bowl");
 }
 
 function getHashTags(hashtag) {
@@ -39,6 +38,12 @@ function fillFromTemplate(templateName) {
 }
 
 function bindListeners() {
+    $('#templateSelector > li > a').bind("click", function(e){
+        selectedTemplate = $(this).attr('id');
+        console.log(selectedTemplate);
+        fillFromTemplate(selectedTemplate);
+    });
+
     $('#selectList > li').bind("click", function (e) {
         clickedItem = retrieveItem($(this).attr('id'));
 

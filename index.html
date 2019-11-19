@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -24,6 +25,14 @@
 <body onload="initApp()">
     <div class="container">
         <div class="form-group">
+            <div class="dropdown">
+                <button class="btn btn-default dropdown-toggle" type="button" id="templateMenu"
+                    data-toggle="dropdown">Templates
+                    <span class="caret"></span></button>
+                <ul id="templateSelector" class="dropdown-menu" role="menu" aria-labelledby="templateMenu">
+                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="bowl">Bowl</a></li>
+                </ul>
+            </div>
             <label for='intro_text_fr'>Introduction in french:</label>
             <textarea class="form-control" id='intro_text_fr'></textarea>
             <label for='intro_text_us'>Introduction in english:</label>
@@ -36,7 +45,7 @@
             <textarea class="form-control" id='hastags'></textarea>
             <label for="selectList">Choose items to add:</label>
             <ul id="selectList" class="list-group">
-               
+
             </ul>
             <textarea readonly class="form-control" id="result_us"></textarea>
             <textarea readonly class="form-control" id="result_fr"></textarea>

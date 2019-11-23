@@ -107,6 +107,12 @@ var model = [
         "display_fr": "Purée de piment 🌶 (booster de goût)",
         "display_us": "Chili pepper mash 🌶 (taste boost)"
     },
+     {
+        "id" : "181",
+        "display": "Eggplant 🍆 (veggies)",
+        "display_fr": "Aubergine 🍆 (légume)",
+        "display_us": "Eggplant 🍆 (veggies)"
+    },
     {
         "id" : "19",
         "display": "Corn 🌽 (carb)",

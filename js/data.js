@@ -47,6 +47,12 @@ var model = [
         "display_fr": "Saumon 🐠(protéines)",
         "display_us": "Salmon 🐠(prot)"
     },
+        {
+        "id" : "81",
+        "display": "Halibut 🐠(prot)",
+        "display_fr": "Flétan 🐠(protéines)",
+        "display_us": "Halibut 🐠(prot)"
+    },
     {
         "id" : "9",
         "display": "Chicken with soy sauce 🍗 (prot)",
@@ -70,6 +76,12 @@ var model = [
         "display": "Cherry tomatoes 🍅 (veggies)",
         "display_fr": "Tomates cerise 🍅 (légumes)",
         "display_us": "Cherry tomatoes 🍅 (veggies)"
+    },
+     {
+        "id" : "121",
+        "display": "Ratatouille 🍅🍆 (veggies)",
+        "display_fr": "Ratatouille 🍅🍆 (légumes)",
+        "display_us": "Ratatouille 🍅🍆 (veggies)"
     },
     {
         "id" : "13",

@@ -66,6 +66,12 @@ var model = [
         "display_us": "Cucumber 🥒 (micro)"
     },
     {
+        "id" : "101",
+        "display": "Zucchini 🥒 (micro)",
+        "display_fr": "Courgette 🥒 (légumes)",
+        "display_us": "Zucchini 🥒 (micro)"
+    },
+    {
         "id" : "11",
         "display": "Red onions (micro)",
         "display_fr": "Oignons rouge (légumes)",
@@ -184,6 +190,18 @@ var model = [
         "display": "Mustard 🍯 (taste boost)",
         "display_fr": "Moutarde 🍯 (gout)",
         "display_us": "Mustard 🍯 (tastte boost)"
+    },
+      {
+        "id" : "29",
+        "display": "Nut oil 🥜 (fat)",
+        "display_fr": "Huile de noix 🥜 (gras)",
+        "display_us": "Nut oil 🥜 (fat)"
+    },
+      {
+        "id" : "30",
+        "display": "Omega 3 mix oil 🥜 (fat)",
+        "display_fr": "Huile Omega 3 mix 🥜 (gras)",
+        "display_us": "Omega 3 mix oil 🥜 (fat)"
     }
 ]
 

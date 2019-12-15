@@ -211,13 +211,13 @@ var templates = {
         "intro_us" : "🇺🇸[bowls series] Mix in a bowl:",
         "closing_fr" : "Le tout bio 👌🏻 enjoy! Curieux des accessoires que j’utilise pour cuisiner ces repas, le lien est sur mon profil!",
         "closing_us" : "All organic 👌🏻 enjoy!",
-        "hashtags" : "#crossfit #mealprep #fitfrenchies #wod #foodprep #musculation #teamshape #mealplan #tbc #topbodychallenge #reequilibragealimentaire #weightlifting #regimeuse #muscu #mealprepsunday #crossfitgirls #powerlifting #regime #mealprepping #crossfitter #macros #protein #crossfitgames #mealprepmonday #nutrition #instaregimeuse #cleaneating #pertedepoids #flexibledieting #topbodychallengeuse"
+        "hashtags" : "#cleaneating #nutrition #weightloss #crossfit #instafit #strong #abs #cardio #exercise #gymlife #mealprep #healthyfood #wod #foodprep #protein #mealplan #healthyeating #fitfood #fitnessaddict #muscle"
     },
       "meal prep" : {
         "intro_fr" : "🇫🇷[série mealprep] Assembler ensemble (3 repas):",
         "intro_us" : "🇺🇸[mealprep series] Assemble together (3 portions):",
         "closing_fr" : "Le tout bio 👌🏻 enjoy! Curieux des accessoires que j’utilise pour cuisiner ces repas, le lien est sur mon profil!",
         "closing_us" : "All organic 👌🏻 enjoy!",
-        "hashtags" : "#crossfit #mealprep #fitfrenchies #wod #foodprep #musculation #teamshape #mealplan #tbc #topbodychallenge #reequilibragealimentaire #weightlifting #regimeuse #muscu #mealprepsunday #crossfitgirls #powerlifting #regime #mealprepping #crossfitter #macros #protein #crossfitgames #mealprepmonday #nutrition #instaregimeuse #cleaneating #pertedepoids #flexibledieting #topbodychallengeuse"
+        "hashtags" : "#cleaneating #nutrition #weightloss #crossfit #instafit #strong #abs #cardio #exercise #gymlife #mealprep #healthyfood #wod #foodprep #protein #mealplan #healthyeating #fitfood #fitnessaddict #muscle"
     }
 }

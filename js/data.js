@@ -72,6 +72,12 @@ var model = [
         "display_us": "Zucchini 🥒 (micro)"
     },
     {
+        "id" : "102",
+        "display": "Carrot 🥕 (veggies)",
+        "display_fr": "Courgette 🥕 (légumes)",
+        "display_us": "Carrot 🥕 (veggies)"
+    },
+    {
         "id" : "11",
         "display": "Red onions (micro)",
         "display_fr": "Oignons rouge (légumes)",
@@ -172,6 +178,12 @@ var model = [
         "display": "Parsley 🍀 (micro)",
         "display_fr": "Persil 🍀 (micro)",
         "display_us": "Parsley 🍀 (micro)"
+    },
+    {
+        "id" : "251",
+        "display": "Coriander 🍀 (micro)",
+        "display_fr": "Coridandre 🍀 (micro)",
+        "display_us": "Coriander 🍀 (micro)"
     },
     {
         "id" : "26",

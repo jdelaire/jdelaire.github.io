@@ -77,6 +77,12 @@ var model = [
         "display_fr": "Courgette 🥕 (légumes)",
         "display_us": "Carrot 🥕 (veggies)"
     },
+        {
+        "id" : "103",
+        "display": "Green beans (micro)",
+        "display_fr": "Petit poids (légumes)",
+        "display_us": "Green beans (micro)"
+    },
     {
         "id" : "11",
         "display": "Red onions (micro)",
@@ -223,13 +229,13 @@ var templates = {
         "intro_us" : "🇺🇸[bowls series] Mix in a bowl:",
         "closing_fr" : "Le tout bio 👌🏻 enjoy! Curieux des accessoires que j’utilise pour cuisiner ces repas, le lien est sur mon profil!",
         "closing_us" : "All organic 👌🏻 enjoy!",
-        "hashtags" : "#cleaneating #nutrition #weightloss #crossfit #instafit #strong #abs #cardio #exercise #gymlife #mealprep #healthyfood #wod #foodprep #protein #mealplan #healthyeating #fitfood #fitnessaddict #muscle"
+        "hashtags" : "#fitfrenchies #crossfit #mealprep #musculation #teamshape #wod #foodprep #mealplan #tbc #topbodychallenge #reequilibragealimentaire #weightlifting #regimeuse #muscu #mealprepsunday #crossfitgirls #powerlifting #regime #mealprepping #crossfitter #macros #protein #crossfitgames #mealprepmonday #nutrition #instaregimeuse #cleaneating #pertedepoids #topbodychallengeuse #maigrir"
     },
       "meal prep" : {
         "intro_fr" : "🇫🇷[série mealprep] Assembler ensemble (3 repas):",
         "intro_us" : "🇺🇸[mealprep series] Assemble together (3 portions):",
         "closing_fr" : "Le tout bio 👌🏻 enjoy! Curieux des accessoires que j’utilise pour cuisiner ces repas, le lien est sur mon profil!",
         "closing_us" : "All organic 👌🏻 enjoy!",
-        "hashtags" : "#cleaneating #nutrition #weightloss #crossfit #instafit #strong #abs #cardio #exercise #gymlife #mealprep #healthyfood #wod #foodprep #protein #mealplan #healthyeating #fitfood #fitnessaddict #muscle"
+        "hashtags" : "#fitfrenchies #crossfit #mealprep #musculation #teamshape #wod #foodprep #mealplan #tbc #topbodychallenge #reequilibragealimentaire #weightlifting #regimeuse #muscu #mealprepsunday #crossfitgirls #powerlifting #regime #mealprepping #crossfitter #macros #protein #crossfitgames #mealprepmonday #nutrition #instaregimeuse #cleaneating #pertedepoids #topbodychallengeuse #maigrir"
     }
 }

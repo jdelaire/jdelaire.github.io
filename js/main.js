@@ -1,19 +1,64 @@
 
+jQuery.ajaxSetup({async:false})
+var htags = []
+
 function initApp() {
     var items = [];
+    // we generate some random guid for each item
     $.each(model, function (i, item) {
-        items.push("<li class='list-group-item' id='" + item.id + "'>" + item.display + "</li>");
+        item.id=guid()
+    });
+    // we insert all data in the oage
+    $.each(model, function (i, item) {
+        items.push("<li class='list-group-item' title='" + item.id + "' id='" + item.id + "'>" + item.display + "</li>");
     });
     $('#selectList').html(items);
     bindListeners();
 }
 
+//generates random id;
+let guid = () => {
+    let s4 = () => {
+        return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+    }
+    //return id of format 'aaaaaaaa'-'aaaa'-'aaaa'-'aaaa'-'aaaaaaaaaaaa'
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+
 function getHashTags(hashtag) {
     url = "https://query.displaypurposes.com/tag/" + hashtag;
     $.get(url, function( data ) {
-        result = data;
-        console.log(data)
+        // console.log(data)
+        generateHashTagList(data.results)
       });
+}
+
+function generateHashTagList(datas) {
+    $.each(datas, function(i, htag) {
+        htags.push(htag)
+    })
+}
+
+function getBestHtags(tags) {
+    $.each(tags, function(i, tag){
+        getHashTags(tag)
+    })
+    // we compute a value to sort tags
+    $.each(htags, function (i, htag) {
+        var rank = htag.rank
+        var rel = htag.relevance
+        htag.power = rel * rank
+    })
+    // we sort by the new valur
+    htags.sort(sortByProperty("power"))
+
+    var bestTags = []
+    for (i = htags.length - 1; i >= htags.length - 30; i--) {
+        bestTags.push("#".concat(htags[i].tag))
+    }
+    return bestTags.join(" ");
 }
 
 function retrieveItem(index) {
@@ -28,14 +73,26 @@ function retrieveItem(index) {
 }
 
 function fillFromTemplate(templateName) {
+    reset_data();
     selectedTemplate = templates[templateName];
     console.log(selectedTemplate);
     $('#intro_text_fr').text(selectedTemplate.intro_fr);
     $('#intro_text_us').text(selectedTemplate.intro_us);
     $('#closing_text_fr').text(selectedTemplate.closing_fr);
     $('#closing_text_us').text(selectedTemplate.closing_us);
-    $('#hastags').text(selectedTemplate.hashtags);
+    $('#hastags').text(getBestHtags(selectedTemplate.hashtags.split(" ")));
 }
+
+function sortByProperty(property){  
+    return function(a,b){  
+       if(a[property] > b[property])  
+          return 1;  
+       else if(a[property] < b[property])  
+          return -1;  
+   
+       return 0;  
+    }  
+ }
 
 function bindListeners() {
     $('#templateSelector > li > a').bind("click", function(e){
@@ -71,10 +128,15 @@ function bindListeners() {
     });
 
     $('#reset').bind("click", function() {
-        $('#result').text("");
-        $('#result_fr').text("");
-        $('#result_us').text("");
+        reset_data()
     });
+}
+
+function reset_data() {
+    $('#result').text("");
+    $('#result_fr').text("");
+    $('#result_us').text("");
+    htags = []
 }
 
 

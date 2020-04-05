@@ -1,37 +1,37 @@
 var model = [
     {
         "display": "Basmati rice 🍚 (carb)",
-        "display_fr": "Riz basmati 🍚 (gluces)",
+        "display_fr": "Riz basmati 🍚 (glucides)",
         "display_us": "Basmati rice 🍚 (carb)"
     },
     {
         "display": "Brown rice 🍚 (carb)",
-        "display_fr": "Riz complet 🍚 (gluces)",
+        "display_fr": "Riz complet 🍚 (glucides)",
         "display_us": "Brown rice 🍚 (carb)"
     },
     {
         "display": "Quinoa 🍚 (carb)",
-        "display_fr": "Quinoa 🍚 (gluces)",
+        "display_fr": "Quinoa 🍚 (glucides)",
         "display_us": "Quinoa 🍚 (carb)"
     },
     {
         "display": "Wholewheat pasta 🍝 (carb)",
-        "display_fr": "Pates complète 🍝 (gluces)",
+        "display_fr": "Pates complète 🍝 (glucides)",
         "display_us": "Wholewheat pasta 🍝 (carb)"
     },
     {
         "display": "lentils pasta 🍝 (carb)",
-        "display_fr": "Pates de lentilles 🍝 (gluces)",
+        "display_fr": "Pates de lentilles 🍝 (glucides)",
         "display_us": "lentils pasta 🍝 (carb)"
     },
     {
         "display": "Potatoes 🥔 (carb)",
-        "display_fr": "Pommes de terres 🥔 (gluces)",
+        "display_fr": "Pommes de terres 🥔 (glucides)",
         "display_us": "Potatoes 🥔 (carb)"
     },
     {
         "display": "Sweet potatoes 🍠 (carb)",
-        "display_fr": "Patates douce 🍠 (gluces)",
+        "display_fr": "Patates douce 🍠 (glucides)",
         "display_us": "Sweet potatoes 🍠 (carb)"
     },
     {

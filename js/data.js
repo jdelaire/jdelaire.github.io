@@ -11,7 +11,7 @@ var model = [
     },
     {
         "display": "Quinoa 🍚 (carb)",
-        "display_fr": "Quinoa 🍚 (gluces)",
+        "display_fr": "Quinoa 🍚 (glucides)",
         "display_us": "Quinoa 🍚 (carb)"
     },
     {

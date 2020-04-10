@@ -70,14 +70,24 @@ var model = [
         "display_us": "Zucchini 🥒 (micro)"
     },
     {
+        "display": "Kale 🌿 (micro)",
+        "display_fr": "Chou kale 🌿 (légumes)",
+        "display_us": "Kale 🌿 (micro)"
+    },
+    {
         "display": "Carrot 🥕 (veggies)",
         "display_fr": "Courgette 🥕 (légumes)",
         "display_us": "Carrot 🥕 (veggies)"
     },
     {
         "display": "Green beans 🌱 (micro)",
-        "display_fr": "Petit pos 🌱 (légumes)",
+        "display_fr": "Petit poids 🌱 (légumes)",
         "display_us": "Green beans 🌱 (micro)"
+    },
+    {
+        "display": "Red beans 🥫 (micro)",
+        "display_fr": "Haricots rouge 🥫 (glucide+protéine)",
+        "display_us": "Red beans 🥫 (micro)"
     },
     {
         "display": "Red onions 🧅 (micro)",
@@ -132,7 +142,7 @@ var model = [
     },
     {
         "display": "Corn 🌽 (carb)",
-        "display_fr": "Maïs 🌽 (gluces)",
+        "display_fr": "Maïs 🌽 (glucides)",
         "display_us": "Corn 🌽 (carb)"
     },
     {
@@ -142,7 +152,7 @@ var model = [
     },
     {
         "display": "Chickpeas (prot+carb)",
-        "display_fr": "Pois chiche (protéines/gluces)",
+        "display_fr": "Pois chiche (protéines/glucides)",
         "display_us": "Chickpeas (prot+carb)"
     },
     {

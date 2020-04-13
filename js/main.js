@@ -10,7 +10,12 @@ function initApp() {
     });
     // we insert all data in the oage
     $.each(model, function (i, item) {
-        items.push("<li class='list-group-item' title='" + item.id + "' id='" + item.id + "'>" + item.display + "</li>");
+        var details = ""
+        if (item.P != undefined) {
+            details = "<span class='details'> P:"+ item.P +" C:"+ item.C +" F:"+ item.F + "</span>";
+        }
+        items.push("<li class='list-group-item "+ item.type +"' title='" + item.id + "' id='" + item.id + "'><span>" 
+        + item.display + "</span>" + details + "</li>");
     });
     $('#selectList').html(items);
     bindListeners();

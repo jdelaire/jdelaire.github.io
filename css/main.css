@@ -4,12 +4,37 @@
    Author's custom styles
    ========================================================================== */
 
-   li:hover {
-    background-color: orange;
-  }
+li:hover {
+    background-color: lightgrey;  
+} 
+
+li .details {
+  float: right;
+}
+
+.C {
+  background-color: lightsalmon;
+}
+
+.F {
+  background-color: lightyellow;
+}
+
+.P {
+  background-color: lightcoral;
+}
+
+.V {
+  background-color: lightgreen;
+}
+
+.T {
+  background-color: lightslategray;
+}
+
 
   body {
-    background-color: lightcyan;
+    background-color: lightskyblue;
   }
 
 

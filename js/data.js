@@ -3,19 +3,28 @@ var model = [
         "display": "Basmati rice 🍚 (carb)",
         "display_fr": "Riz basmati 🍚 (glucides)",
         "display_us": "Basmati rice 🍚 (carb)",
-        "type" : "C"
+        "type" : "C",
+        "C" : "73",
+        "P" : "9",
+        "F" : "2"
     },
     {
         "display": "Brown rice 🍚 (carb)",
         "display_fr": "Riz complet 🍚 (glucides)",
         "display_us": "Brown rice 🍚 (carb)",
-        "type" : "C"
+        "type" : "C",
+        "C" : "77",
+        "P" : "8",
+        "F" : "3"
     },
     {
         "display": "Quinoa 🍚 (carb)",
         "display_fr": "Quinoa 🍚 (glucides)",
         "display_us": "Quinoa 🍚 (carb)",
-        "type" : "C"
+        "type" : "C",
+        "C" : "64",
+        "P" : "14",
+        "F" : "6"
     },
     {
         "display": "Wholewheat pasta 🍝 (carb)",
@@ -30,37 +39,55 @@ var model = [
         "display": "Lentils pasta 🍝 (carb)",
         "display_fr": "Pates de lentilles 🍝 (glucides)",
         "display_us": "Lentils pasta 🍝 (carb)",
-        "type" : "C"
+        "type" : "C",
+        "C" : "50",
+        "P" : "26",
+        "F" : "2"
     },
     {
         "display": "Potatoes 🥔 (carb)",
         "display_fr": "Pommes de terres 🥔 (glucides)",
         "display_us": "Potatoes 🥔 (carb)",
-        "type" : "C"
+        "type" : "C",
+        "C" : "26",
+        "P" : "3",
+        "F" : "0"
     },
     {
         "display": "Sweet potatoes 🍠 (carb)",
         "display_fr": "Patates douce 🍠 (glucides)",
         "display_us": "Sweet potatoes 🍠 (carb)",
-        "type" : "C"
+        "type" : "C",
+        "C" : "23",
+        "P" : "1",
+        "F" : "0"
     },
     {
         "display": "Red beans 🥫 (micro)",
         "display_fr": "Haricots rouge 🥫 (glucide+protéine)",
         "display_us": "Red beans 🥫 (micro)",
-        "type" : "C"
+        "type" : "C",
+        "C" : "63",
+        "P" : "20",
+        "F" : "0"
     },
     {
         "display": "Chickpeas (prot+carb)",
         "display_fr": "Pois chiche (protéines/glucides)",
         "display_us": "Chickpeas (prot+carb)",
-        "type" : "C"
+        "type" : "C",
+        "C" : "45",
+        "P" : "6",
+        "F" : "5"
     },
     {
         "display": "Corn 🌽 (carb)",
         "display_fr": "Maïs 🌽 (glucides)",
         "display_us": "Corn 🌽 (carb)",
-        "type" : "C"
+        "type" : "C",
+        "C" : "23",
+        "P" : "3",
+        "F" : "0"
     },
     {
         "display": "Tuna 🎣 (prot)",

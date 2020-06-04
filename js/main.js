@@ -33,7 +33,7 @@ let guid = () => {
 }
 
 function getHashTags(hashtag) {
-    url = "https://query.displaypurposes.com/tag/" + hashtag;
+    url = "https://apidisplaypurposes.com/tag" + hashtag;
     $.get(url, function( data ) {
         // console.log(data)
         generateHashTagList(data.results)

@@ -270,6 +270,18 @@ var model = [
         "type" : "F"
     },
     {
+        "display": "Goat cheese 🧀 (fat+prot)",
+        "display_fr": "Fêta 🧀 (gras)",
+        "display_us": "Goat cheese 🧀 (fat)",
+        "type" : "F"
+    },
+    {
+        "display": "Mozzarela 🧀 (fat+prot)",
+        "display_fr": "Mozzarela 🧀 (gras)",
+        "display_us": "Mozzarela 🧀 (fat)",
+        "type" : "F"
+    },
+    {
         "display": "Parsley 🍀 (micro)",
         "display_fr": "Persil 🍀 (micro)",
         "display_us": "Parsley 🍀 (micro)",

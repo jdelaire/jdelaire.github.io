@@ -138,17 +138,61 @@
     }
     @media (max-width: 600px) {
       body {
-        padding: 1em;
+        padding: 0.5em;
+        min-height: 100vh;
+      }
+      h1 {
+        font-size: 1.5em;
+        margin-bottom: 0.3em;
       }
       #symbol {
-        font-size: 8em;
+        font-size: 7em;
+        margin: 0.3em 0 0.8em 0;
+      }
+      .legend {
+        gap: 1em;
+        margin-bottom: 0.3em;
+        font-size: 0.8em;
+        flex-wrap: wrap;
+        justify-content: center;
       }
       .options {
         max-width: 100%;
+        gap: 0.8em;
       }
       button {
-        font-size: 1.1em;
-        padding: 0.8em;
+        font-size: 1em;
+        padding: 0.7em;
+        min-height: 3em;
+      }
+      button .emoji {
+        font-size: 1.3em;
+      }
+      #feedback {
+        font-size: 1.2em;
+        margin-top: 0.8em;
+      }
+      #nextBtn {
+        margin-top: 1.5em;
+        padding: 0.7em 1.5em;
+      }
+      .stats {
+        margin-top: 1.5em;
+        font-size: 0.8em;
+      }
+    }
+    
+    @media (max-width: 400px) {
+      #symbol {
+        font-size: 6em;
+      }
+      .legend {
+        flex-direction: column;
+        gap: 0.5em;
+      }
+      button {
+        font-size: 0.9em;
+        padding: 0.6em;
       }
     }
   </style>

@@ -4,20 +4,31 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="Learn Thai consonants through an interactive quiz. Practice all 44 Thai consonants with pronunciation and meanings.">
+  <meta name="keywords" content="Thai, consonants, alphabet, quiz, learning, language">
+  <meta name="author" content="Thai Consonant Quiz">
   <title>Thai Consonant Quiz</title>
   <style>
     body {
-      font-family: sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
       text-align: center;
       background-color: #f9f9f9;
       padding: 2em;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
     h1 {
       color: #333;
+      margin-bottom: 0.5em;
     }
     #symbol {
-      font-size: 5em;
+      font-size: 8em;
       margin: 1em 0;
+      font-weight: bold;
+      color: #2c3e50;
     }
     .options {
       display: flex;
@@ -27,250 +38,405 @@
       margin: 0 auto;
     }
     button {
-      padding: 0.5em;
-      font-size: 1.1em;
+      padding: 1em;
+      font-size: 1.3em;
       cursor: pointer;
+      border: 2px solid #3498db;
+      background-color: white;
+      color: #3498db;
+      border-radius: 8px;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+    button:hover {
+      background-color: #3498db;
+      color: white;
+      transform: translateY(-2px);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    button .emoji {
+      font-size: 1.5em;
+      margin-right: 0.3em;
+    }
+    .middle-class {
+      border-color: #27ae60 !important;
+      color: #27ae60 !important;
+    }
+    .middle-class:hover {
+      background-color: #27ae60 !important;
+      color: white !important;
+    }
+    .high-class {
+      border-color: #f39c12 !important;
+      color: #f39c12 !important;
+    }
+    .high-class:hover {
+      background-color: #f39c12 !important;
+      color: white !important;
+    }
+    .low-class {
+      border-color: #3498db !important;
+      color: #3498db !important;
+    }
+    .low-class:hover {
+      background-color: #3498db !important;
+      color: white !important;
+    }
+    .legend {
+      display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      margin-bottom: 1em;
+      font-size: 0.9em;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.3em;
+    }
+    .legend-color {
+      width: 1em;
+      height: 1em;
+      border-radius: 50%;
+      display: inline-block;
+    }
+    .legend-color.middle-class {
+      background-color: #27ae60;
+    }
+    .legend-color.high-class {
+      background-color: #f39c12;
+    }
+    .legend-color.low-class {
+      background-color: #3498db;
     }
     #feedback {
       margin-top: 1em;
       font-size: 1.3em;
+      font-weight: bold;
+      min-height: 1.5em;
     }
     #nextBtn {
       margin-top: 2em;
-      padding: 0.5em 1em;
-      font-size: 1em;
+      padding: 0.8em 2em;
+      font-size: 1.1em;
       display: none;
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    #nextBtn:hover {
+      background-color: #229954;
+    }
+    .stats {
+      margin-top: 2em;
+      font-size: 0.9em;
+      color: #666;
+    }
+    @media (max-width: 600px) {
+      body {
+        padding: 1em;
+      }
+      #symbol {
+        font-size: 6em;
+      }
+      .options {
+        max-width: 100%;
+      }
+      button {
+        font-size: 1.1em;
+        padding: 0.8em;
+      }
     }
   </style>
 </head>
 <body>
   <h1>Thai Consonant Quiz</h1>
-  <div id="symbol">?</div>
-  <div class="options" id="options"></div>
-  <div id="feedback"></div>
-  <button id="nextBtn">Next</button>
+  <div class="legend">
+    <span class="legend-item"><span class="legend-color middle-class"></span> Middle Class</span>
+    <span class="legend-item"><span class="legend-color high-class"></span> High Class</span>
+    <span class="legend-item"><span class="legend-color low-class"></span> Low Class</span>
+  </div>
+  <div id="symbol" role="text" aria-label="Thai consonant symbol">?</div>
+  <div class="options" id="options" role="group" aria-label="Answer options"></div>
+  <div id="feedback" role="status" aria-live="polite"></div>
+  <button id="nextBtn" aria-label="Next question">Next</button>
+  <div class="stats" id="stats"></div>
 
   <script>
     const data = JSON.parse(`[
   {
     "symbol": "ก",
     "name": "gɔɔ gài",
-    "meaning": "chicken"
+    "meaning": "chicken",
+    "emoji": "🐔",
+    "class": "middle"
   },
   {
     "symbol": "ข",
     "name": "khɔ̌ɔ khài",
-    "meaning": "egg"
+    "meaning": "egg",
+    "emoji": "🥚",
+    "class": "high"
   },
   {
     "symbol": "ฃ",
     "name": "khɔ̌ɔ khùat",
-    "meaning": "bottle"
+    "meaning": "bottle",
+    "emoji": "🍾",
+    "class": "high"
   },
   {
     "symbol": "ค",
     "name": "khɔɔ khwaay",
-    "meaning": "water buffalo"
+    "meaning": "water buffalo",
+    "emoji": "🐃",
+    "class": "low"
   },
   {
     "symbol": "ฅ",
     "name": "khɔɔ khon",
-    "meaning": "human"
+    "meaning": "human",
+    "emoji": "👤"
   },
   {
     "symbol": "ฆ",
     "name": "khɔɔ rá-khaŋ",
-    "meaning": "bell"
+    "meaning": "bell",
+    "emoji": "🔔"
   },
   {
     "symbol": "ง",
     "name": "ŋɔɔ ŋuu",
-    "meaning": "snake"
+    "meaning": "snake",
+    "emoji": "🐍"
   },
   {
     "symbol": "จ",
     "name": "jɔɔ jaan",
-    "meaning": "plate"
+    "meaning": "plate",
+    "emoji": "🍽️",
+    "class": "middle"
   },
   {
     "symbol": "ฉ",
     "name": "chɔ̌ɔ chìŋ",
-    "meaning": "cymbal"
+    "meaning": "cymbal",
+    "emoji": "🥁",
+    "class": "high"
   },
   {
     "symbol": "ช",
     "name": "chɔɔ cháaŋ",
-    "meaning": "elephant"
+    "meaning": "elephant",
+    "emoji": "🐘"
   },
   {
     "symbol": "ซ",
     "name": "sɔɔ sôo",
-    "meaning": "chain"
+    "meaning": "chain",
+    "emoji": "⛓️"
   },
   {
     "symbol": "ฌ",
     "name": "chɔɔ chəə",
-    "meaning": "name of tree"
+    "meaning": "name of tree",
+    "emoji": "🌳"
   },
   {
     "symbol": "ญ",
     "name": "yɔɔ phûu yǐŋ",
-    "meaning": "female"
+    "meaning": "female",
+    "emoji": "👩"
   },
   {
     "symbol": "ฎ",
     "name": "dɔɔ chá-daa",
-    "meaning": "head dress"
+    "meaning": "head dress",
+    "emoji": "👑"
   },
   {
     "symbol": "ฏ",
     "name": "dtɔɔ bpà-dtàk",
-    "meaning": "lance"
+    "meaning": "lance",
+    "emoji": "⚔️"
   },
   {
     "symbol": "ฐ",
     "name": "thɔ̌ɔ thɑ̌ɑn",
-    "meaning": "pedestal"
+    "meaning": "pedestal",
+    "emoji": "🏛️"
   },
   {
     "symbol": "ฑ",
     "name": "thɔɔ mon-thoo",
-    "meaning": "Lady Montho"
+    "meaning": "Lady Montho",
+    "emoji": "👸"
   },
   {
     "symbol": "ฒ",
     "name": "thɔɔ phûu-thâw",
-    "meaning": "elderly"
+    "meaning": "elderly",
+    "emoji": "👴"
   },
   {
     "symbol": "ณ",
     "name": "nɔɔ neen",
-    "meaning": "novice"
+    "meaning": "novice",
+    "emoji": "🧘"
   },
   {
     "symbol": "ด",
     "name": "dɔɔ dèk",
-    "meaning": "child"
+    "meaning": "child",
+    "emoji": "👶"
   },
   {
     "symbol": "ต",
     "name": "dtɔɔ dtàw",
-    "meaning": "turtle"
+    "meaning": "turtle",
+    "emoji": "🐢"
   },
   {
     "symbol": "ถ",
     "name": "thɔ̌ɔ thŭŋ",
-    "meaning": "bag"
+    "meaning": "bag",
+    "emoji": "👜"
   },
   {
     "symbol": "ท",
     "name": "thɔɔ thá-hɑ̌an",
-    "meaning": "soldier"
+    "meaning": "soldier",
+    "emoji": "💂"
   },
   {
     "symbol": "ธ",
     "name": "thɔɔ thoŋ",
-    "meaning": "flag"
+    "meaning": "flag",
+    "emoji": "🏁"
   },
   {
     "symbol": "น",
     "name": "nɔɔ nǔu",
-    "meaning": "mouse"
+    "meaning": "mouse",
+    "emoji": "🐭"
   },
   {
     "symbol": "บ",
     "name": "bɔɔ bai-máay",
-    "meaning": "leaf"
+    "meaning": "leaf",
+    "emoji": "🍃"
   },
   {
     "symbol": "ป",
     "name": "bpɔɔ bplaa",
-    "meaning": "fish"
+    "meaning": "fish",
+    "emoji": "🐟"
   },
   {
     "symbol": "ผ",
     "name": "phɔ̌ɔ phɯ̂ŋ",
-    "meaning": "bee"
+    "meaning": "bee",
+    "emoji": "🐝"
   },
   {
     "symbol": "ฝ",
     "name": "fɔ̌ɔ făa",
-    "meaning": "lid/cover"
+    "meaning": "lid/cover",
+    "emoji": "🔒"
   },
   {
     "symbol": "พ",
     "name": "phɔɔ phaan",
-    "meaning": "offering tray"
+    "meaning": "offering tray",
+    "emoji": "🛐"
   },
   {
     "symbol": "ฟ",
     "name": "fɔɔ fan",
-    "meaning": "tooth"
+    "meaning": "tooth",
+    "emoji": "🦷"
   },
   {
     "symbol": "ภ",
     "name": "phɔɔ săm-phaw",
-    "meaning": "junk"
+    "meaning": "junk",
+    "emoji": "🚢"
   },
   {
     "symbol": "ม",
     "name": "mɔɔ máa",
-    "meaning": "horse"
+    "meaning": "horse",
+    "emoji": "🐎"
   },
   {
     "symbol": "ย",
     "name": "yɔɔ yák",
-    "meaning": "giant"
+    "meaning": "giant",
+    "emoji": "👹"
   },
   {
     "symbol": "ร",
     "name": "rɔɔ rɯa",
-    "meaning": "boat"
+    "meaning": "boat",
+    "emoji": "🚣"
   },
   {
     "symbol": "ล",
     "name": "lɔɔ liŋ",
-    "meaning": "monkey"
+    "meaning": "monkey",
+    "emoji": "🐒"
   },
   {
     "symbol": "ว",
     "name": "wɔɔ wɛ̌ɛn",
-    "meaning": "ring"
+    "meaning": "ring",
+    "emoji": "💍"
   },
   {
     "symbol": "ศ",
     "name": "sɔ̌ɔ sǎa-laa",
-    "meaning": "pavilion"
+    "meaning": "pavilion",
+    "emoji": "🏛️"
   },
   {
     "symbol": "ษ",
     "name": "sɔ̌ɔ rɯɯ-sǐi",
-    "meaning": "hermit"
+    "meaning": "hermit",
+    "emoji": "🧙"
   },
   {
     "symbol": "ส",
     "name": "sɔ̌ɔ sɯ̌a",
-    "meaning": "tiger"
+    "meaning": "tiger",
+    "emoji": "🐯"
   },
   {
     "symbol": "ห",
     "name": "hɔ̌ɔ hìip",
-    "meaning": "treasure chest"
+    "meaning": "treasure chest",
+    "emoji": "💎"
   },
   {
     "symbol": "ฬ",
     "name": "lɔɔ jù-laa",
-    "meaning": "kite"
+    "meaning": "kite",
+    "emoji": "🪁"
   },
   {
     "symbol": "อ",
     "name": "ɔɔ àaŋ",
-    "meaning": "basin"
+    "meaning": "basin",
+    "emoji": "🛁"
   },
   {
     "symbol": "ฮ",
     "name": "hɔɔ nók-hûuk",
-    "meaning": "owl"
+    "meaning": "owl",
+    "emoji": "🦉"
   }
 ]`);
 
@@ -278,8 +444,11 @@
     const optionsEl = document.getElementById('options');
     const feedbackEl = document.getElementById('feedback');
     const nextBtn = document.getElementById('nextBtn');
+    const statsEl = document.getElementById('stats');
 
     let currentAnswer = null;
+    let questionsAnswered = 0;
+    let correctAnswers = 0;
 
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -287,6 +456,11 @@
         [array[i], array[j]] = [array[j], array[i]];
       }
       return array;
+    }
+
+    function updateStats() {
+      const accuracy = questionsAnswered > 0 ? Math.round((correctAnswers / questionsAnswered) * 100) : 0;
+      statsEl.textContent = `Questions: ${questionsAnswered} | Correct: ${correctAnswers} | Accuracy: ${accuracy}%`;
     }
 
     function pickQuestion() {
@@ -300,30 +474,51 @@
       const choices = [answer];
       while (choices.length < 4) {
         const rand = data[Math.floor(Math.random() * data.length)];
-        if (!choices.includes(rand)) choices.push(rand);
+        if (!choices.find(c => c.name === rand.name)) choices.push(rand);
       }
 
       shuffle(choices);
       symbolEl.textContent = answer.symbol;
+      symbolEl.setAttribute('aria-label', `Thai consonant symbol: ${answer.symbol}`);
 
       choices.forEach(choice => {
         const btn = document.createElement('button');
-        btn.textContent = choice.name;
+        btn.innerHTML = `<span class="emoji">${choice.emoji}</span> ${choice.name}`;
+        btn.setAttribute('aria-label', `Answer: ${choice.name} (${choice.meaning})`);
+        btn.classList.add(`${choice.class}-class`);
         btn.onclick = () => {
+          questionsAnswered++;
           if (choice.name === answer.name) {
+            correctAnswers++;
             feedbackEl.textContent = "✅ Correct!";
             nextBtn.style.display = "inline-block";
           } else {
             feedbackEl.textContent = "❌ Try again!";
           }
+          updateStats();
         };
         optionsEl.appendChild(btn);
       });
     }
 
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+      if (e.key >= '1' && e.key <= '4') {
+        const buttons = optionsEl.querySelectorAll('button');
+        const index = parseInt(e.key) - 1;
+        if (buttons[index]) {
+          buttons[index].click();
+        }
+      } else if (e.key === 'Enter' && nextBtn.style.display !== 'none') {
+        nextBtn.click();
+      }
+    });
+
     nextBtn.onclick = pickQuestion;
 
+    // Initialize
     pickQuestion();
+    updateStats();
   </script>
 </body>
 </html>

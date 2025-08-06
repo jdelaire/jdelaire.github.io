@@ -1,67 +1,329 @@
-<!doctype html>
-<html class="no-js" lang="">
 
+<!DOCTYPE html>
+<html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Instagram i18n content generator</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" href="apple-touch-icon.png">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <style>
-        body {
-            padding-top: 50px;
-            padding-bottom: 20px;
-        }
-    </style>
-    <link rel="stylesheet" href="css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="css/main.css">
-
-    <script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-    <script src="js/data.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thai Consonant Quiz</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      background-color: #f9f9f9;
+      padding: 2em;
+    }
+    h1 {
+      color: #333;
+    }
+    #symbol {
+      font-size: 5em;
+      margin: 1em 0;
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    button {
+      padding: 0.5em;
+      font-size: 1.1em;
+      cursor: pointer;
+    }
+    #feedback {
+      margin-top: 1em;
+      font-size: 1.3em;
+    }
+    #nextBtn {
+      margin-top: 2em;
+      padding: 0.5em 1em;
+      font-size: 1em;
+      display: none;
+    }
+  </style>
 </head>
+<body>
+  <h1>Thai Consonant Quiz</h1>
+  <div id="symbol">?</div>
+  <div class="options" id="options"></div>
+  <div id="feedback"></div>
+  <button id="nextBtn">Next</button>
 
-<body onload="initApp()">
-    <div class="container">
-        <div class="form-group">
-            <div class="dropdown">
-                <button class="btn btn-default dropdown-toggle" type="button" id="templateMenu"
-                    data-toggle="dropdown">Templates
-                    <span class="caret"></span></button>
-                <ul id="templateSelector" class="dropdown-menu" role="menu" aria-labelledby="templateMenu">
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="bowl">Bowl</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="meal prep">Meal prep</a></li>
-                    <li role="presentation"><a role="menuitem" tabindex="-1" href="#" id="brekkie">Brekkie</a></li>
-                </ul>
-            </div>
-            <label for='intro_text_fr'>Introduction in french:</label>
-            <textarea class="form-control" id='intro_text_fr'></textarea>
-            <label for='intro_text_us'>Introduction in english:</label>
-            <textarea class="form-control" id='intro_text_us'></textarea>
-            <label for='closing_text_fr'>Closing in french:</label>
-            <textarea class="form-control" id='closing_text_fr'></textarea>
-            <label for='closing_text_us'>Closing in english:</label>
-            <textarea class="form-control" id='closing_text_us'></textarea>
-            <label for='hastags'>Hashtags to includes:</label>
-            <textarea class="form-control" id='hastags'></textarea>
-            <label for="selectList">Choose items to add:</label>
-            <ul id="selectList" class="list-group">
+  <script>
+    const data = JSON.parse(`[
+  {
+    "symbol": "ก",
+    "name": "gɔɔ gài",
+    "meaning": "chicken"
+  },
+  {
+    "symbol": "ข",
+    "name": "khɔ̌ɔ khài",
+    "meaning": "egg"
+  },
+  {
+    "symbol": "ฃ",
+    "name": "khɔ̌ɔ khùat",
+    "meaning": "bottle"
+  },
+  {
+    "symbol": "ค",
+    "name": "khɔɔ khwaay",
+    "meaning": "water buffalo"
+  },
+  {
+    "symbol": "ฅ",
+    "name": "khɔɔ khon",
+    "meaning": "human"
+  },
+  {
+    "symbol": "ฆ",
+    "name": "khɔɔ rá-khaŋ",
+    "meaning": "bell"
+  },
+  {
+    "symbol": "ง",
+    "name": "ŋɔɔ ŋuu",
+    "meaning": "snake"
+  },
+  {
+    "symbol": "จ",
+    "name": "jɔɔ jaan",
+    "meaning": "plate"
+  },
+  {
+    "symbol": "ฉ",
+    "name": "chɔ̌ɔ chìŋ",
+    "meaning": "cymbal"
+  },
+  {
+    "symbol": "ช",
+    "name": "chɔɔ cháaŋ",
+    "meaning": "elephant"
+  },
+  {
+    "symbol": "ซ",
+    "name": "sɔɔ sôo",
+    "meaning": "chain"
+  },
+  {
+    "symbol": "ฌ",
+    "name": "chɔɔ chəə",
+    "meaning": "name of tree"
+  },
+  {
+    "symbol": "ญ",
+    "name": "yɔɔ phûu yǐŋ",
+    "meaning": "female"
+  },
+  {
+    "symbol": "ฎ",
+    "name": "dɔɔ chá-daa",
+    "meaning": "head dress"
+  },
+  {
+    "symbol": "ฏ",
+    "name": "dtɔɔ bpà-dtàk",
+    "meaning": "lance"
+  },
+  {
+    "symbol": "ฐ",
+    "name": "thɔ̌ɔ thɑ̌ɑn",
+    "meaning": "pedestal"
+  },
+  {
+    "symbol": "ฑ",
+    "name": "thɔɔ mon-thoo",
+    "meaning": "Lady Montho"
+  },
+  {
+    "symbol": "ฒ",
+    "name": "thɔɔ phûu-thâw",
+    "meaning": "elderly"
+  },
+  {
+    "symbol": "ณ",
+    "name": "nɔɔ neen",
+    "meaning": "novice"
+  },
+  {
+    "symbol": "ด",
+    "name": "dɔɔ dèk",
+    "meaning": "child"
+  },
+  {
+    "symbol": "ต",
+    "name": "dtɔɔ dtàw",
+    "meaning": "turtle"
+  },
+  {
+    "symbol": "ถ",
+    "name": "thɔ̌ɔ thŭŋ",
+    "meaning": "bag"
+  },
+  {
+    "symbol": "ท",
+    "name": "thɔɔ thá-hɑ̌an",
+    "meaning": "soldier"
+  },
+  {
+    "symbol": "ธ",
+    "name": "thɔɔ thoŋ",
+    "meaning": "flag"
+  },
+  {
+    "symbol": "น",
+    "name": "nɔɔ nǔu",
+    "meaning": "mouse"
+  },
+  {
+    "symbol": "บ",
+    "name": "bɔɔ bai-máay",
+    "meaning": "leaf"
+  },
+  {
+    "symbol": "ป",
+    "name": "bpɔɔ bplaa",
+    "meaning": "fish"
+  },
+  {
+    "symbol": "ผ",
+    "name": "phɔ̌ɔ phɯ̂ŋ",
+    "meaning": "bee"
+  },
+  {
+    "symbol": "ฝ",
+    "name": "fɔ̌ɔ făa",
+    "meaning": "lid/cover"
+  },
+  {
+    "symbol": "พ",
+    "name": "phɔɔ phaan",
+    "meaning": "offering tray"
+  },
+  {
+    "symbol": "ฟ",
+    "name": "fɔɔ fan",
+    "meaning": "tooth"
+  },
+  {
+    "symbol": "ภ",
+    "name": "phɔɔ săm-phaw",
+    "meaning": "junk"
+  },
+  {
+    "symbol": "ม",
+    "name": "mɔɔ máa",
+    "meaning": "horse"
+  },
+  {
+    "symbol": "ย",
+    "name": "yɔɔ yák",
+    "meaning": "giant"
+  },
+  {
+    "symbol": "ร",
+    "name": "rɔɔ rɯa",
+    "meaning": "boat"
+  },
+  {
+    "symbol": "ล",
+    "name": "lɔɔ liŋ",
+    "meaning": "monkey"
+  },
+  {
+    "symbol": "ว",
+    "name": "wɔɔ wɛ̌ɛn",
+    "meaning": "ring"
+  },
+  {
+    "symbol": "ศ",
+    "name": "sɔ̌ɔ sǎa-laa",
+    "meaning": "pavilion"
+  },
+  {
+    "symbol": "ษ",
+    "name": "sɔ̌ɔ rɯɯ-sǐi",
+    "meaning": "hermit"
+  },
+  {
+    "symbol": "ส",
+    "name": "sɔ̌ɔ sɯ̌a",
+    "meaning": "tiger"
+  },
+  {
+    "symbol": "ห",
+    "name": "hɔ̌ɔ hìip",
+    "meaning": "treasure chest"
+  },
+  {
+    "symbol": "ฬ",
+    "name": "lɔɔ jù-laa",
+    "meaning": "kite"
+  },
+  {
+    "symbol": "อ",
+    "name": "ɔɔ àaŋ",
+    "meaning": "basin"
+  },
+  {
+    "symbol": "ฮ",
+    "name": "hɔɔ nók-hûuk",
+    "meaning": "owl"
+  }
+]`);
 
-            </ul>
-            <textarea readonly class="form-control" id="result_us"></textarea>
-            <textarea readonly class="form-control" id="result_fr"></textarea>
-            <label for='result'>Final text:</label>
-            <textarea class="form-control" id='result'></textarea>
-            <button id="generate" class="btn btn-info">Generate</button>
-            <button id="reset" class="btn btn-info">Reset</button>
-        </div>
-    </div>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.11.2.min.js"><\/script>')</script>
+    const symbolEl = document.getElementById('symbol');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
 
-    <script src="js/vendor/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
+    let currentAnswer = null;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function pickQuestion() {
+      feedbackEl.textContent = "";
+      nextBtn.style.display = "none";
+      optionsEl.innerHTML = "";
+
+      const answer = data[Math.floor(Math.random() * data.length)];
+      currentAnswer = answer;
+
+      const choices = [answer];
+      while (choices.length < 4) {
+        const rand = data[Math.floor(Math.random() * data.length)];
+        if (!choices.includes(rand)) choices.push(rand);
+      }
+
+      shuffle(choices);
+      symbolEl.textContent = answer.symbol;
+
+      choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.textContent = choice.name;
+        btn.onclick = () => {
+          if (choice.name === answer.name) {
+            feedbackEl.textContent = "✅ Correct!";
+            nextBtn.style.display = "inline-block";
+          } else {
+            feedbackEl.textContent = "❌ Try again!";
+          }
+        };
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    nextBtn.onclick = pickQuestion;
+
+    pickQuestion();
+  </script>
 </body>
-
 </html>

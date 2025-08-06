@@ -1,1 +1,0 @@
-# jdelaire.github.io

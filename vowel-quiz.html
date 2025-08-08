@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Thai Vowel Quiz</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      padding: 2em;
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      color: white;
+    }
+    h1 {
+      color: white;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+    }
+    #symbol {
+      font-size: 8em;
+      margin: 1em 0;
+      font-weight: bold;
+      color: white;
+      text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+    }
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      max-width: 300px;
+      margin: 0 auto;
+    }
+    button {
+      padding: 1em;
+      font-size: 1.3em;
+      cursor: pointer;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      border-radius: 15px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+    }
+    button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    button:active {
+      transform: translateY(0);
+    }
+    #feedback {
+      margin-top: 1em;
+      font-size: 1.3em;
+      font-weight: bold;
+      min-height: 1.5em;
+      color: white;
+    }
+    #nextBtn {
+      margin-top: 2em;
+      padding: 0.8em 2em;
+      font-size: 1.1em;
+      display: none;
+      background: linear-gradient(45deg, #27ae60, #2ecc71);
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+    #nextBtn:hover {
+      background: linear-gradient(45deg, #229954, #27ae60);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    #example {
+      margin-top: 0.5em;
+      font-size: 1em;
+      color: rgba(255, 255, 255, 0.8);
+    }
+    .header {
+      position: relative;
+      margin-bottom: 1em;
+    }
+    .back-btn {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      color: white;
+      text-decoration: none;
+      padding: 0.5em 1em;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      transition: all 0.3s ease;
+      font-size: 0.9em;
+      backdrop-filter: blur(10px);
+    }
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-50%) translateX(-2px);
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+    <h1>Thai Vowel Quiz</h1>
+  </div>
+  <div id="symbol">?</div>
+  <div id="example"></div>
+  <div class="options" id="options"></div>
+  <div id="feedback"></div>
+  <button id="nextBtn">Next</button>
+
+  <script>
+    const data = JSON.parse(`[{"symbol": "-ะ", "sound": "a", "example": "but, cut"}, {"symbol": "-า", "sound": "aa", "example": "baht, cart"}, {"symbol": "-ิ", "sound": "i", "example": "did, bit"}, {"symbol": "-ี", "sound": "ii", "example": "beat, deed"}, {"symbol": "-ึ", "sound": "ɯ", "example": "-"}, {"symbol": "-ื", "sound": "ɯɯ", "example": "-"}, {"symbol": "-ุ", "sound": "u", "example": "foot, book"}, {"symbol": "-ู", "sound": "uu", "example": "blue, too"}, {"symbol": "เ-ะ", "sound": "e", "example": "yet, bet"}, {"symbol": "เ-", "sound": "ee", "example": "fate, taste"}, {"symbol": "แ-ะ", "sound": "ɛ", "example": "fat, black"}, {"symbol": "แ-", "sound": "ɛɛ", "example": "can, fan"}, {"symbol": "โ-ะ", "sound": "o", "example": "only, Toyota"}, {"symbol": "โ-", "sound": "oo", "example": "tone, doe"}, {"symbol": "เ-าะ", "sound": "ɔ", "example": "cot, watch"}, {"symbol": "-อ", "sound": "ɔɔ", "example": "bought, cause"}, {"symbol": "เ-อะ", "sound": "ə", "example": "modern, gentle"}, {"symbol": "เ-อ", "sound": "əə", "example": "birth, dirt"}, {"symbol": "เ-ีย", "sound": "iɑ", "example": "tear, dear"}, {"symbol": "เ-ือ", "sound": "ɯɑ", "example": "-"}, {"symbol": "-ัว", "sound": "uɑ", "example": "tour"}, {"symbol": "ไ-", "sound": "ɑi", "example": "why, hi"}, {"symbol": "ใ-", "sound": "ɑi", "example": "why, hi"}, {"symbol": "-ำ", "sound": "ɑm", "example": "yummy"}, {"symbol": "เ-า", "sound": "ɑw", "example": "doubt, about"}]`);
+
+    const symbolEl = document.getElementById('symbol');
+    const exampleEl = document.getElementById('example');
+    const optionsEl = document.getElementById('options');
+    const feedbackEl = document.getElementById('feedback');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentAnswer = null;
+
+    function shuffle(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function pickQuestion() {
+      feedbackEl.textContent = "";
+      nextBtn.style.display = "none";
+      optionsEl.innerHTML = "";
+
+      const answer = data[Math.floor(Math.random() * data.length)];
+      currentAnswer = answer;
+
+      const choices = [answer];
+      while (choices.length < 4) {
+        const rand = data[Math.floor(Math.random() * data.length)];
+        if (!choices.includes(rand)) choices.push(rand);
+      }
+
+      shuffle(choices);
+      symbolEl.textContent = answer.symbol;
+      exampleEl.textContent = "(e.g., " + answer.example + ")";
+
+      choices.forEach(choice => {
+        const btn = document.createElement('button');
+        btn.textContent = choice.sound;
+        btn.onclick = () => {
+          if (choice.sound === answer.sound) {
+            feedbackEl.textContent = "✅ Correct!";
+            nextBtn.style.display = "inline-block";
+          } else {
+            feedbackEl.textContent = "❌ Try again!";
+          }
+        };
+        optionsEl.appendChild(btn);
+      });
+    }
+
+    nextBtn.onclick = pickQuestion;
+
+    pickQuestion();
+  </script>
+</body>
+</html>

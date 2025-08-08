@@ -126,54 +126,7 @@
     .legend-color.low-class {
       background-color: #3498db;
     }
-    .controls {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 1em;
-    }
-    .sound-toggle {
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      padding: 0.5em 1em;
-      border-radius: 20px;
-      font-size: 0.9em;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      font-weight: 500;
-      backdrop-filter: blur(10px);
-    }
-    .sound-toggle:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-    }
-    .sound-toggle.off {
-      background: rgba(255, 255, 255, 0.1);
-      opacity: 0.7;
-    }
-    .sound-toggle.off:hover {
-      background: rgba(255, 255, 255, 0.15);
-      opacity: 0.9;
-    }
-    .voice-select {
-      margin-left: 1em;
-      padding: 0.5em;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      border-radius: 8px;
-      font-size: 0.9em;
-      background: rgba(255, 255, 255, 0.1);
-      color: white;
-      backdrop-filter: blur(10px);
-    }
-    .voice-select:focus {
-      outline: none;
-      border-color: rgba(255, 255, 255, 0.5);
-    }
-    .voice-select option {
-      background: #764ba2;
-      color: white;
-    }
+
     #feedback {
       margin-top: 1em;
       font-size: 1.3em;
@@ -203,28 +156,26 @@
       font-size: 0.9em;
       color: rgba(255, 255, 255, 0.8);
     }
-    .header {
-      position: relative;
-      margin-bottom: 1em;
+    .footer {
+      margin-top: 2em;
+      text-align: center;
     }
     .back-btn {
-      position: absolute;
-      left: 0;
-      top: 50%;
-      transform: translateY(-50%);
       color: white;
       text-decoration: none;
-      padding: 0.5em 1em;
-      border-radius: 20px;
+      padding: 0.8em 1.5em;
+      border-radius: 25px;
       background: rgba(255, 255, 255, 0.2);
       border: 1px solid rgba(255, 255, 255, 0.3);
       transition: all 0.3s ease;
-      font-size: 0.9em;
+      font-size: 1em;
+      font-weight: 500;
       backdrop-filter: blur(10px);
+      display: inline-block;
     }
     .back-btn:hover {
       background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-50%) translateX(-2px);
+      transform: translateY(-2px);
       box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     }
     @media (max-width: 600px) {
@@ -271,18 +222,7 @@
         margin-top: 1.5em;
         font-size: 0.8em;
       }
-      .controls {
-        margin-bottom: 0.5em;
-      }
-      .sound-toggle {
-        font-size: 0.8em;
-        padding: 0.4em 0.8em;
-      }
-      .voice-select {
-        font-size: 0.8em;
-        margin-left: 0.5em;
-        max-width: 150px;
-      }
+
     }
     
     @media (max-width: 400px) {
@@ -301,18 +241,7 @@
   </style>
 </head>
 <body>
-  <div class="header">
-    <a href="index.html" class="back-btn">← Back to Home</a>
-    <h1>Thai Consonant Quiz</h1>
-  </div>
-  <div class="controls">
-    <button id="soundToggle" class="sound-toggle off" aria-label="Toggle sound">
-      🔇 Sound Off
-    </button>
-    <select id="voiceSelect" class="voice-select" aria-label="Select voice">
-      <option value="">Loading voices...</option>
-    </select>
-  </div>
+  <h1>Thai Consonant Quiz</h1>
   <div class="legend">
     <span class="legend-item"><span class="legend-color middle-class"></span> Middle Class</span>
     <span class="legend-item"><span class="legend-color high-class"></span> High Class</span>
@@ -323,6 +252,9 @@
   <div id="feedback" role="status" aria-live="polite"></div>
   <button id="nextBtn" aria-label="Next question">Next</button>
   <div class="stats" id="stats"></div>
+  <div class="footer">
+    <a href="index.html" class="back-btn">← Back to Home</a>
+  </div>
 
   <script>
     const data = JSON.parse(`[
@@ -365,13 +297,15 @@
     "symbol": "ฆ",
     "name": "khɔɔ rá-khaŋ",
     "meaning": "bell",
-    "emoji": "🔔"
+    "emoji": "🔔",
+    "class": "low"
   },
   {
     "symbol": "ง",
     "name": "ŋɔɔ ŋuu",
     "meaning": "snake",
-    "emoji": "🐍"
+    "emoji": "🐍",
+    "class": "low"
   },
   {
     "symbol": "จ",
@@ -639,15 +573,10 @@
     const feedbackEl = document.getElementById('feedback');
     const nextBtn = document.getElementById('nextBtn');
     const statsEl = document.getElementById('stats');
-    const soundToggle = document.getElementById('soundToggle');
-    const voiceSelect = document.getElementById('voiceSelect');
 
     let currentAnswer = null;
     let questionsAnswered = 0;
     let correctAnswers = 0;
-    let soundEnabled = false;
-    let speechSynth = window.speechSynthesis;
-    let selectedVoice = null;
 
     function shuffle(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -660,123 +589,6 @@
     function updateStats() {
       const accuracy = questionsAnswered > 0 ? Math.round((correctAnswers / questionsAnswered) * 100) : 0;
       statsEl.textContent = `Questions: ${questionsAnswered} | Correct: ${correctAnswers} | Accuracy: ${accuracy}%`;
-    }
-
-    function speak(text, rate = 0.8) {
-      if (!soundEnabled || !speechSynth) return;
-      
-      // Clean the text to ensure it only contains pronunciation
-      // Remove any non-letter characters except spaces and basic punctuation
-      const cleanText = text.replace(/[^\w\s\u0300-\u036f\u00E0-\u00FF]/g, '').trim();
-      
-      console.log('Speaking:', cleanText);
-      
-      // Cancel any ongoing speech
-      speechSynth.cancel();
-      
-      const utterance = new SpeechSynthesisUtterance(cleanText);
-      utterance.lang = 'th-TH';
-      utterance.rate = rate;
-      utterance.pitch = 1;
-      utterance.volume = 0.8;
-      
-      // Wait for voices to load if they haven't already
-      if (speechSynth.getVoices().length === 0) {
-        speechSynth.onvoiceschanged = () => {
-          selectBestVoice(utterance);
-          speechSynth.speak(utterance);
-        };
-      } else {
-        selectBestVoice(utterance);
-        speechSynth.speak(utterance);
-      }
-    }
-
-    function populateVoiceSelector() {
-      const voices = speechSynth.getVoices();
-      voiceSelect.innerHTML = '';
-      
-      if (voices.length === 0) {
-        voiceSelect.innerHTML = '<option value="">No voices available</option>';
-        return;
-      }
-      
-      // Add default option
-      const defaultOption = document.createElement('option');
-      defaultOption.value = '';
-      defaultOption.textContent = 'Auto-select best voice';
-      voiceSelect.appendChild(defaultOption);
-      
-      // Add all available voices
-      voices.forEach((voice, index) => {
-        const option = document.createElement('option');
-        option.value = index;
-        option.textContent = `${voice.name} (${voice.lang})`;
-        voiceSelect.appendChild(option);
-      });
-      
-      // Auto-select Thai voice if available
-      const thaiVoice = voices.find(voice => 
-        voice.lang.toLowerCase().includes('th') ||
-        voice.name.toLowerCase().includes('thai')
-      );
-      if (thaiVoice) {
-        const thaiIndex = voices.indexOf(thaiVoice);
-        voiceSelect.value = thaiIndex;
-        selectedVoice = thaiVoice;
-      }
-    }
-
-    function selectBestVoice(utterance) {
-      const voices = speechSynth.getVoices();
-      
-      if (selectedVoice) {
-        utterance.voice = selectedVoice;
-        return;
-      }
-      
-      // Priority order for Thai voices
-      const thaiVoicePatterns = [
-        'th-TH',
-        'th',
-        'Thai',
-        'thai'
-      ];
-      
-      let bestVoice = null;
-      
-      // Try to find the best Thai voice
-      for (const pattern of thaiVoicePatterns) {
-        bestVoice = voices.find(voice => 
-          voice.lang.toLowerCase().includes(pattern.toLowerCase()) ||
-          voice.name.toLowerCase().includes(pattern.toLowerCase())
-        );
-        if (bestVoice) break;
-      }
-      
-      // If no Thai voice found, try to find a female voice (often better for Thai)
-      if (!bestVoice) {
-        bestVoice = voices.find(voice => 
-          voice.name.toLowerCase().includes('female') ||
-          voice.name.toLowerCase().includes('woman')
-        );
-      }
-      
-      // Fallback to any available voice
-      if (!bestVoice && voices.length > 0) {
-        bestVoice = voices[0];
-      }
-      
-      if (bestVoice) {
-        utterance.voice = bestVoice;
-        console.log('Using voice:', bestVoice.name, bestVoice.lang);
-      }
-    }
-
-    function toggleSound() {
-      soundEnabled = !soundEnabled;
-      soundToggle.textContent = soundEnabled ? '🔊 Sound On' : '🔇 Sound Off';
-      soundToggle.classList.toggle('off', !soundEnabled);
     }
 
     function pickQuestion() {
@@ -803,10 +615,6 @@
         btn.setAttribute('aria-label', `Answer: ${choice.name} (${choice.meaning})`);
         btn.classList.add(`${choice.class}-class`);
         btn.onclick = () => {
-          // Speak only the pronunciation text (not the emoji)
-          console.log('Choice name:', choice.name);
-          speak(choice.name);
-          
           questionsAnswered++;
           if (choice.name === answer.name) {
             correctAnswers++;
@@ -820,21 +628,6 @@
         optionsEl.appendChild(btn);
       });
     }
-
-    // Sound toggle event listener
-    soundToggle.addEventListener('click', toggleSound);
-    
-    // Voice selection event listener
-    voiceSelect.addEventListener('change', (e) => {
-      const voices = speechSynth.getVoices();
-      const selectedIndex = e.target.value;
-      
-      if (selectedIndex === '') {
-        selectedVoice = null; // Use auto-selection
-      } else {
-        selectedVoice = voices[parseInt(selectedIndex)];
-      }
-    });
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
@@ -854,13 +647,6 @@
     // Initialize
     pickQuestion();
     updateStats();
-    
-    // Initialize voice selector
-    if (speechSynth.getVoices().length === 0) {
-      speechSynth.onvoiceschanged = populateVoiceSelector;
-    } else {
-      populateVoiceSelector();
-    }
   </script>
 </body>
 </html>

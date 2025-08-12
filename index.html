@@ -200,6 +200,9 @@
     if (thaiEl && phonEl) {
       thaiEl.textContent = thaiWeekdays[day];
       phonEl.textContent = phoneticWeekdays[day];
+      const dayColors = ['#e74c3c','#f1c40f','#e91e63','#2ecc71','#e67e22','#3498db','#8e44ad'];
+      thaiEl.style.color = dayColors[day];
+      phonEl.style.color = dayColors[day];
     }
 
     const thaiMonths = ['มกราคม','กุมภาพันธ์','มีนาคม','เมษายน','พฤษภาคม','มิถุนายน','กรกฎาคม','สิงหาคม','กันยายน','ตุลาคม','พฤศจิกายน','ธันวาคม'];

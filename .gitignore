@@ -1,0 +1,16 @@
+# Generated .gitignore patterns
+
+# IDE Files
+.vscode/
+.idea/
+*.sublime-workspace
+*.sublime-project
+.vs/
+
+# OS Generated
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+Desktop.ini

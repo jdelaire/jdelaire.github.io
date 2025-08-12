@@ -600,7 +600,8 @@
       currentAnswer = answer;
 
       const choices = [answer];
-      while (choices.length < 4) {
+      const numChoices = correctAnswers >= 30 ? 6 : 4;
+      while (choices.length < numChoices) {
         const rand = data[Math.floor(Math.random() * data.length)];
         if (!choices.find(c => c.name === rand.name)) choices.push(rand);
       }
@@ -609,9 +610,10 @@
       symbolEl.textContent = answer.symbol;
       symbolEl.setAttribute('aria-label', `Thai consonant symbol: ${answer.symbol}`);
 
+      const hideEmojis = correctAnswers >= 50;
       choices.forEach(choice => {
         const btn = document.createElement('button');
-        btn.innerHTML = `<span class="emoji">${choice.emoji}</span> ${choice.name}`;
+        btn.innerHTML = hideEmojis ? `${choice.name}` : `<span class="emoji">${choice.emoji}</span> ${choice.name}`;
         btn.setAttribute('aria-label', `Answer: ${choice.name} (${choice.meaning})`);
         btn.classList.add(`${choice.class}-class`);
         btn.onclick = () => {
@@ -631,9 +633,9 @@
 
     // Keyboard navigation
     document.addEventListener('keydown', (e) => {
-      if (e.key >= '1' && e.key <= '4') {
+      if (/^[1-9]$/.test(e.key)) {
         const buttons = optionsEl.querySelectorAll('button');
-        const index = parseInt(e.key) - 1;
+        const index = parseInt(e.key, 10) - 1;
         if (buttons[index]) {
           buttons[index].click();
         }

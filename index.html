@@ -112,11 +112,41 @@
         padding: 1.5em;
       }
     }
+    .today-card {
+      background: rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(8px);
+      border-radius: 16px;
+      display: inline-block;
+      padding: 1em 1.5em;
+      margin: 0 auto 2em;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+    .today-heading {
+      font-size: 0.9em;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0.85;
+      margin-bottom: 0.3em;
+    }
+    .today-thai {
+      font-size: 1.6em;
+      font-weight: 700;
+    }
+    .today-phonetic {
+      font-size: 1.05em;
+      opacity: 0.95;
+    }
   </style>
 </head>
 <body>
   <h1>🇹🇭 Thai Language Quiz</h1>
   <p class="subtitle">Master Thai consonants and vowels through interactive learning</p>
+  
+  <div class="today-card" aria-live="polite">
+    <div class="today-heading">Today</div>
+    <div class="today-thai" id="weekday-thai">...</div>
+    <div class="today-phonetic" id="weekday-phonetic">...</div>
+  </div>
   
   <div class="quiz-container">
     <div class="quiz-card" onclick="window.location.href='consonant-quiz.html'">
@@ -147,5 +177,21 @@
       <a href="vowel-quiz.html" class="start-btn">Start Vowel Quiz</a>
     </div>
   </div>
+<script>
+(function() {
+  const thaiWeekdays = ['วันอาทิตย์','วันจันทร์','วันอังคาร','วันพุธ','วันพฤหัสบดี','วันศุกร์','วันเสาร์'];
+  const phoneticWeekdays = ['Wan Athit','Wan Chan','Wan Angkhan','Wan Phut','Wan Pharuehat','Wan Suk','Wan Sao'];
+  try {
+    const now = new Date();
+    const day = now.getDay();
+    const thaiEl = document.getElementById('weekday-thai');
+    const phonEl = document.getElementById('weekday-phonetic');
+    if (thaiEl && phonEl) {
+      thaiEl.textContent = thaiWeekdays[day];
+      phonEl.textContent = phoneticWeekdays[day];
+    }
+  } catch (e) {}
+})();
+</script>
 </body>
 </html>

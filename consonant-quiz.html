@@ -600,7 +600,7 @@
       currentAnswer = answer;
 
       const choices = [answer];
-      const numChoices = correctAnswers >= 40 ? 6 : 4;
+      const numChoices = correctAnswers >= 30 ? 6 : 4;
       while (choices.length < numChoices) {
         const rand = data[Math.floor(Math.random() * data.length)];
         if (!choices.find(c => c.name === rand.name)) choices.push(rand);
@@ -610,7 +610,7 @@
       symbolEl.textContent = answer.symbol;
       symbolEl.setAttribute('aria-label', `Thai consonant symbol: ${answer.symbol}`);
 
-      const hideEmojis = correctAnswers >= 60;
+      const hideEmojis = correctAnswers >= 50;
       choices.forEach(choice => {
         const btn = document.createElement('button');
         btn.innerHTML = hideEmojis ? `${choice.name}` : `<span class="emoji">${choice.emoji}</span> ${choice.name}`;

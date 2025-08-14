@@ -1,0 +1,393 @@
+/* Shared base styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  text-align: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 2em;
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+
+h1 {
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.subtitle {
+  opacity: 0.9;
+}
+
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin: 0 auto;
+}
+
+button {
+  padding: 1em;
+  font-size: 1.2em;
+  cursor: pointer;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  border-radius: 15px;
+  transition: all 0.3s ease;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+}
+
+button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+#feedback {
+  margin-top: 1em;
+  font-size: 1.3em;
+  font-weight: bold;
+  min-height: 1.5em;
+  color: white;
+}
+
+#nextBtn {
+  margin-top: 2em;
+  padding: 0.8em 2em;
+  font-size: 1.1em;
+  display: none;
+  background: linear-gradient(45deg, #27ae60, #2ecc71);
+  color: white;
+  border: none;
+  border-radius: 15px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+#nextBtn:hover {
+  background: linear-gradient(45deg, #229954, #27ae60);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+}
+
+.stats {
+  margin-top: 2em;
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.footer {
+  margin-top: 2em;
+  text-align: center;
+}
+
+.back-btn {
+  color: white;
+  text-decoration: none;
+  padding: 0.8em 1.5em;
+  border-radius: 25px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  transition: all 0.3s ease;
+  font-size: 1em;
+  font-weight: 500;
+  backdrop-filter: blur(10px);
+  display: inline-block;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* Page-specific overrides using body classes */
+
+/* Home (index) */
+body.home h1 {
+  margin-bottom: 1em;
+  font-size: 2.5em;
+}
+
+body.home .subtitle {
+  font-size: 1.2em;
+  margin-bottom: 3em;
+}
+
+body.home .quiz-container {
+  display: flex;
+  justify-content: center;
+  gap: 2em;
+  flex-wrap: wrap;
+  margin-bottom: 2em;
+}
+
+body.home .quiz-card {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2em;
+  min-width: 300px;
+  max-width: 400px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+body.home .quiz-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+}
+
+body.home .quiz-card h2 {
+  margin: 0 0 1em 0;
+  font-size: 1.8em;
+  color: white;
+}
+
+body.home .quiz-card p {
+  margin: 0 0 1.5em 0;
+  opacity: 0.9;
+  line-height: 1.6;
+}
+
+body.home .quiz-card .features {
+  text-align: left;
+  margin-bottom: 1.5em;
+}
+
+body.home .quiz-card .features li {
+  margin-bottom: 0.5em;
+  opacity: 0.9;
+}
+
+.start-btn {
+  background: linear-gradient(45deg, #27ae60, #2ecc71);
+  color: white;
+  border: none;
+  padding: 1em 2em;
+  border-radius: 25px;
+  font-size: 1.1em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.start-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  background: linear-gradient(45deg, #229954, #27ae60);
+}
+
+body.home .footer {
+  margin-top: 3em;
+  opacity: 0.7;
+  font-size: 0.9em;
+}
+
+.today-card {
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(8px);
+  border-radius: 16px;
+  display: inline-block;
+  padding: 1em 1.5em;
+  margin: 0 auto 2em;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.today-heading {
+  font-size: 0.9em;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  opacity: 0.85;
+  margin-bottom: 0.3em;
+}
+
+.today-thai {
+  font-size: 1.6em;
+  font-weight: 700;
+}
+
+.today-phonetic {
+  font-size: 1.05em;
+  opacity: 0.95;
+}
+
+.today-section {
+  margin-top: 0.8em;
+}
+
+/* Consonant quiz */
+body.consonant-quiz h1 {
+  margin-bottom: 0.5em;
+}
+
+body.consonant-quiz #symbol {
+  font-size: 10em;
+  margin: 0.5em 0 1em 0;
+  font-weight: bold;
+  color: white;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+
+body.consonant-quiz .options {
+  max-width: 300px;
+}
+
+button .emoji {
+  font-size: 1.5em;
+  margin-right: 0.3em;
+}
+
+.middle-class {
+  border-color: #27ae60 !important;
+  background-color: #27ae60 !important;
+  color: white !important;
+}
+
+.middle-class:hover {
+  background-color: #229954 !important;
+  color: white !important;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(39, 174, 96, 0.3);
+}
+
+.high-class {
+  border-color: #f39c12 !important;
+  background-color: #f39c12 !important;
+  color: white !important;
+}
+
+.high-class:hover {
+  background-color: #e67e22 !important;
+  color: white !important;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(243, 156, 18, 0.3);
+}
+
+.low-class {
+  border-color: #3498db !important;
+  background-color: #3498db !important;
+  color: white !important;
+}
+
+.low-class:hover {
+  background-color: #2980b9 !important;
+  color: white !important;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+}
+
+.legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5em;
+  margin-bottom: 0.5em;
+  font-size: 0.9em;
+  color: white;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.3em;
+}
+
+.legend-color {
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.legend-color.middle-class { background-color: #27ae60; }
+.legend-color.high-class { background-color: #f39c12; }
+.legend-color.low-class { background-color: #3498db; }
+
+/* Color quiz */
+body.color-quiz h1 { margin-bottom: 0.2em; }
+body.color-quiz #symbol {
+  font-size: 4.5em;
+  margin: 0.6em 0 0.6em 0;
+  font-weight: 800;
+  color: white;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+body.color-quiz .options { max-width: 500px; }
+
+/* Numbers quiz */
+body.numbers-quiz h1 { margin-bottom: 0.2em; }
+body.numbers-quiz #symbol {
+  font-size: 4.6em;
+  margin: 0.6em 0 0.6em 0;
+  font-weight: 800;
+  color: white;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+body.numbers-quiz .options { max-width: 600px; }
+.pro-tip { margin-top: 1.2em; font-size: 0.95em; opacity: 0.95; }
+.pro-tip small { opacity: 0.9; }
+
+/* Vowel quiz */
+body.vowel-quiz #symbol {
+  font-size: 8em;
+  margin: 1em 0;
+  font-weight: bold;
+  color: white;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+}
+body.vowel-quiz .options { max-width: 300px; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  body.home { padding: 1em; }
+  body.home h1 { font-size: 2em; }
+  body.home .quiz-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1.5em;
+  }
+  body.home .quiz-card {
+    min-width: 280px;
+    padding: 1.5em;
+  }
+}
+
+@media (max-width: 600px) {
+  body { padding: 0.8em; }
+  body.color-quiz #symbol { font-size: 3.4em; }
+  body.numbers-quiz #symbol { font-size: 3.6em; }
+  body.consonant-quiz #symbol { font-size: 7em; margin: 0.3em 0 0.8em 0; }
+  button { font-size: 1.05em; padding: 0.8em; }
+
+  body.consonant-quiz h1 { font-size: 1.5em; margin-bottom: 0.3em; }
+  body.consonant-quiz .legend { gap: 1em; margin-bottom: 0.3em; font-size: 0.8em; flex-wrap: wrap; justify-content: center; }
+  body.consonant-quiz .options { max-width: 100%; gap: 0.8em; }
+  body.consonant-quiz button { font-size: 1em; padding: 0.7em; min-height: 3em; }
+  body.consonant-quiz button .emoji { font-size: 1.3em; }
+  body.consonant-quiz #feedback { font-size: 1.2em; margin-top: 0.8em; }
+  body.consonant-quiz #nextBtn { margin-top: 1.5em; padding: 0.7em 1.5em; }
+  body.consonant-quiz .stats { margin-top: 1.5em; font-size: 0.8em; }
+
+  body.color-quiz button { font-size: 1.05em; padding: 0.8em; }
+}
+
+@media (max-width: 400px) {
+  body.consonant-quiz #symbol { font-size: 6em; }
+  body.consonant-quiz .legend { flex-direction: column; gap: 0.5em; }
+  body.consonant-quiz button { font-size: 0.9em; padding: 0.6em; }
+}

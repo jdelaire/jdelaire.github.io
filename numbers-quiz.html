@@ -21,6 +21,7 @@
     </div>
   </div>
 
+  <script src="quiz.js"></script>
   <script>
     const data = JSON.parse(`[
       {"number":"0","thai":"ศูนย์","phonetic":"sǔun"},
@@ -62,83 +63,23 @@
       {"number":"1,000,000","thai":"หนึ่งล้าน","phonetic":"nɯ̀ŋ-láan"}
     ]`);
 
-    const symbolEl = document.getElementById('symbol');
-    const optionsEl = document.getElementById('options');
-    const feedbackEl = document.getElementById('feedback');
-    const nextBtn = document.getElementById('nextBtn');
-    const statsEl = document.getElementById('stats');
-
-    let currentAnswer = null;
-    let questionsAnswered = 0;
-    let correctAnswers = 0;
-
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    function updateStats() {
-      const accuracy = questionsAnswered > 0 ? Math.round((correctAnswers / questionsAnswered) * 100) : 0;
-      statsEl.textContent = `Questions: ${questionsAnswered} | Correct: ${correctAnswers} | Accuracy: ${accuracy}%`;
-    }
-
-    function pickQuestion() {
-      feedbackEl.textContent = "";
-      nextBtn.style.display = "none";
-      optionsEl.innerHTML = "";
-
-      const answer = data[Math.floor(Math.random() * data.length)];
-      currentAnswer = answer;
-
-      const choices = [answer];
-      while (choices.length < 4) {
-        const rand = data[Math.floor(Math.random() * data.length)];
-        if (!choices.find(c => c.phonetic === rand.phonetic)) choices.push(rand);
-      }
-
-      shuffle(choices);
-      symbolEl.textContent = `${answer.number}  ${answer.thai}`;
-      symbolEl.setAttribute('aria-label', `Number and Thai: ${answer.number} ${answer.thai}`);
-
-      choices.forEach(choice => {
-        const btn = document.createElement('button');
-        btn.textContent = choice.phonetic;
-        btn.setAttribute('aria-label', `Answer: ${choice.phonetic}`);
-        btn.onclick = () => {
-          questionsAnswered++;
-          if (choice.phonetic === answer.phonetic) {
-            correctAnswers++;
-            feedbackEl.textContent = "✅ Correct!";
-            nextBtn.style.display = "inline-block";
-          } else {
-            feedbackEl.textContent = "❌ Try again!";
-          }
-          updateStats();
-        };
-        optionsEl.appendChild(btn);
-      });
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (/^[1-9]$/.test(e.key)) {
-        const buttons = optionsEl.querySelectorAll('button');
-        const index = parseInt(e.key, 10) - 1;
-        if (buttons[index]) {
-          buttons[index].click();
+    ThaiQuiz.setupQuiz({
+      elements: { symbol: 'symbol', options: 'options', feedback: 'feedback', nextBtn: 'nextBtn', stats: 'stats' },
+      pickRound: () => {
+        const answer = data[Math.floor(Math.random() * data.length)];
+        const choices = [answer];
+        while (choices.length < 4) {
+          const rand = data[Math.floor(Math.random() * data.length)];
+          if (!choices.find(c => c.phonetic === rand.phonetic)) choices.push(rand);
         }
-      } else if (e.key === 'Enter' && nextBtn.style.display !== 'none') {
-        nextBtn.click();
-      }
+        const symbolText = `${answer.number}  ${answer.thai}`;
+        const symbolAriaLabel = `Number and Thai: ${answer.number} ${answer.thai}`;
+        return { answer, choices, symbolText, symbolAriaLabel };
+      },
+      renderButtonContent: (choice) => choice.phonetic,
+      ariaLabelForChoice: (choice) => `Answer: ${choice.phonetic}`,
+      isCorrect: (choice, answer) => choice.phonetic === answer.phonetic
     });
-
-    nextBtn.onclick = pickQuestion;
-
-    // Initialize
-    pickQuestion();
-    updateStats();
   </script>
 </body>
 </html>

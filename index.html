@@ -3,80 +3,43 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Learn Thai consonants and vowels through interactive quizzes. Practice all 44 Thai consonants and 32 vowels with pronunciation and meanings.">
-  <meta name="keywords" content="Thai, consonants, vowels, alphabet, quiz, learning, language">
-  <meta name="author" content="Thai Language Quiz">
-  <title>Thai Quiz</title>
+  <meta name="description" content="Landing page for jdelaire's GitHub projects." />
+  <title>Projects • jdelaire</title>
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="home">
-  <h1>🇹🇭 Thai Language Quiz</h1>
-  <p class="subtitle">Master Thai through interactive learning</p>
-  
-  <div class="today-card" aria-live="polite">
-    <div class="today-heading">Today</div>
-    <div class="today-thai" id="weekday-thai">...</div>
-    <div class="today-phonetic" id="weekday-phonetic">...</div>
+<body class="landing">
+  <header class="hero" role="banner">
+    <h1>Projects by John</h1>
+    <p class="tagline">A growing collection of web tools, experiments, and learning apps.</p>
+    <div class="social">
+      <a class="back-btn" href="https://github.com/jdelaire" target="_blank" rel="noopener">View GitHub Profile</a>
+    </div>
+  </header>
 
-    <div class="today-section">
-      <div class="today-heading">Month</div>
-      <div class="today-thai" id="month-thai">...</div>
-      <div class="today-phonetic" id="month-phonetic">...</div>
-    </div>
-  </div>
-  
-  <div class="quiz-container">
-    <div class="quiz-card" onclick="window.location.href='consonant-quiz.html'">
-      <h2>🔤 Consonant Quiz</h2>
-      <p>Learn all 44 Thai consonants with pronunciation, meanings, and tone classes.</p>
-      <div class="features">
-        <ul>
-          <li>✅ Color-coded tone classes</li>
-          <li>✅ Emoji associations</li>
-          <li>✅ Progress tracking</li>
-        </ul>
+  <main>
+    <section aria-labelledby="featured-title">
+      <h2 id="featured-title" class="section-title">Featured</h2>
+      <div class="projects-grid">
+        <a class="project-card" href="https://jdelaire.github.io/learn-thai-quiz/index.html" target="_blank" rel="noopener">
+          <span class="badge">Thai</span>
+          <h3>Thai Quiz</h3>
+          <p>Interactive quizzes to learn Thai consonants, vowels, numbers, and colors — with phonetics and progress tracking.</p>
+          <div class="pills">
+            <span class="pill">Web App</span>
+            <span class="pill">Language Learning</span>
+          </div>
+          <span class="btn">Open project</span>
+        </a>
       </div>
-      <a href="consonant-quiz.html" class="start-btn">Start Consonant Quiz</a>
-    </div>
-    
-    <div class="quiz-card" onclick="window.location.href='vowel-quiz.html'">
-      <h2>🔤 Vowel Quiz</h2>
-      <p>Practice 32 Thai vowels with sound patterns and example words.</p>
-      <div class="features">
-        <ul>
-          <li>✅ Vowel symbols</li>
-          <li>✅ Sound patterns</li>
-        </ul>
-      </div>
-      <a href="vowel-quiz.html" class="start-btn">Start Vowel Quiz</a>
-    </div>
+    </section>
 
-    <div class="quiz-card" onclick="window.location.href='color-quiz.html'">
-      <h2>🎨 Color Quiz</h2>
-      <p>Practice Thai colors including light/dark modifiers with phonetics.</p>
-      <div class="features">
-        <ul>
-          <li>✅ Base colors</li>
-          <li>✅ Light/Dark modifiers</li>
-        </ul>
-      </div>
-      <a href="color-quiz.html" class="start-btn">Start Color Quiz</a>
-    </div>
-    
-    <div class="quiz-card" onclick="window.location.href='numbers-quiz.html'">
-      <h2>🔢 Numbers Quiz</h2>
-      <p>Practice Thai numbers with phonetics, from 0 to the millions.</p>
-      <div class="features">
-        <ul>
-          <li>✅ Basic 0–10</li>
-          <li>✅ Teens and Tens</li>
-          <li>✅ Hundreds & Thousands</li>
-        </ul>
-      </div>
-      <a href="numbers-quiz.html" class="start-btn">Start Numbers Quiz</a>
-    </div>
-  </div>
-  <script src="quiz.js"></script>
-  <script src="home.js"></script>
+    <section class="coming-soon" aria-live="polite">
+      <p>More projects coming soon.</p>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    © 2025 • <a href="https://github.com/jdelaire" target="_blank" rel="noopener">github.com/jdelaire</a>
+  </footer>
 </body>
 </html>

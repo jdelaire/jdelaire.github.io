@@ -221,8 +221,8 @@
       }
 
       shuffle(choices);
-      symbolEl.textContent = answer.number;
-      symbolEl.setAttribute('aria-label', `Thai number: ${answer.number}`);
+      symbolEl.textContent = `${answer.number}  ${answer.thai}`;
+      symbolEl.setAttribute('aria-label', `Number and Thai: ${answer.number} ${answer.thai}`);
 
       choices.forEach(choice => {
         const btn = document.createElement('button');

@@ -18,6 +18,7 @@
     <a href="index.html" class="back-btn">← Back to Home</a>
   </div>
 
+  <script src="quiz.js"></script>
   <script>
     const data = JSON.parse(`[
   {
@@ -147,69 +148,20 @@
   }
 ]`);
 
-    const symbolEl = document.getElementById('symbol');
-    const optionsEl = document.getElementById('options');
-    const feedbackEl = document.getElementById('feedback');
-    const nextBtn = document.getElementById('nextBtn');
-    const statsEl = document.getElementById('stats');
-
-    let currentAnswer = null;
-    let questionsAnswered = 0;
-    let correctAnswers = 0;
-
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    function updateStats() {
-      const accuracy = questionsAnswered > 0 ? Math.round((correctAnswers / questionsAnswered) * 100) : 0;
-      statsEl.textContent = `Questions: ${questionsAnswered} | Correct: ${correctAnswers} | Accuracy: ${accuracy}%`;
-    }
-
-    function pickQuestion() {
-      feedbackEl.textContent = "";
-      nextBtn.style.display = "none";
-      optionsEl.innerHTML = "";
-
-      const answer = data[Math.floor(Math.random() * data.length)];
-      currentAnswer = answer;
-
-      const choices = [answer];
-      while (choices.length < 4) {
-        const rand = data[Math.floor(Math.random() * data.length)];
-        if (!choices.includes(rand)) choices.push(rand);
-      }
-
-      shuffle(choices);
-      symbolEl.textContent = answer.symbol;
-
-      choices.forEach(choice => {
-        const btn = document.createElement('button');
-        btn.textContent = choice.sound;
-        btn.onclick = () => {
-          questionsAnswered++;
-          if (choice.sound === answer.sound) {
-            correctAnswers++;
-            feedbackEl.textContent = "✅ Correct!";
-            nextBtn.style.display = "inline-block";
-          } else {
-            feedbackEl.textContent = "❌ Try again!";
-          }
-          updateStats();
-        };
-        optionsEl.appendChild(btn);
-      });
-    }
-
-    nextBtn.onclick = pickQuestion;
-
-    // Initialize
-    pickQuestion();
-    updateStats();
+    ThaiQuiz.setupQuiz({
+      elements: { symbol: 'symbol', options: 'options', feedback: 'feedback', nextBtn: 'nextBtn', stats: 'stats' },
+      pickRound: () => {
+        const answer = data[Math.floor(Math.random() * data.length)];
+        const choices = [answer];
+        while (choices.length < 4) {
+          const rand = data[Math.floor(Math.random() * data.length)];
+          if (!choices.includes(rand)) choices.push(rand);
+        }
+        return { answer, choices, symbolText: answer.symbol };
+      },
+      renderButtonContent: (choice) => choice.sound,
+      isCorrect: (choice, answer) => choice.sound === answer.sound
+    });
   </script>
 </body>
 </html>

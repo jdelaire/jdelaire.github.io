@@ -26,6 +26,7 @@
     <a href="index.html" class="back-btn">← Back to Home</a>
   </div>
 
+  <script src="quiz.js"></script>
   <script>
     const data = JSON.parse(`[
   {
@@ -338,87 +339,30 @@
   }
 ]`);
 
-    const symbolEl = document.getElementById('symbol');
-    const optionsEl = document.getElementById('options');
-    const feedbackEl = document.getElementById('feedback');
-    const nextBtn = document.getElementById('nextBtn');
-    const statsEl = document.getElementById('stats');
-
-    let currentAnswer = null;
-    let questionsAnswered = 0;
-    let correctAnswers = 0;
-
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    function updateStats() {
-      const accuracy = questionsAnswered > 0 ? Math.round((correctAnswers / questionsAnswered) * 100) : 0;
-      statsEl.textContent = `Questions: ${questionsAnswered} | Correct: ${correctAnswers} | Accuracy: ${accuracy}%`;
-    }
-
-    function pickQuestion() {
-      feedbackEl.textContent = "";
-      nextBtn.style.display = "none";
-      optionsEl.innerHTML = "";
-
-      const answer = data[Math.floor(Math.random() * data.length)];
-      currentAnswer = answer;
-
-      const choices = [answer];
-      const numChoices = correctAnswers >= 30 ? 6 : 4;
-      while (choices.length < numChoices) {
-        const rand = data[Math.floor(Math.random() * data.length)];
-        if (!choices.find(c => c.name === rand.name)) choices.push(rand);
-      }
-
-      shuffle(choices);
-      symbolEl.textContent = answer.symbol;
-      symbolEl.setAttribute('aria-label', `Thai consonant symbol: ${answer.symbol}`);
-
-      const hideEmojis = correctAnswers >= 50;
-      choices.forEach(choice => {
-        const btn = document.createElement('button');
-        btn.innerHTML = hideEmojis ? `${choice.name}` : `<span class="emoji">${choice.emoji}</span> ${choice.name}`;
-        btn.setAttribute('aria-label', `Answer: ${choice.name} (${choice.meaning})`);
-        btn.classList.add(`${choice.class}-class`);
-        btn.onclick = () => {
-          questionsAnswered++;
-          if (choice.name === answer.name) {
-            correctAnswers++;
-            feedbackEl.textContent = "✅ Correct!";
-            nextBtn.style.display = "inline-block";
-          } else {
-            feedbackEl.textContent = "❌ Try again!";
-          }
-          updateStats();
-        };
-        optionsEl.appendChild(btn);
-      });
-    }
-
-    // Keyboard navigation
-    document.addEventListener('keydown', (e) => {
-      if (/^[1-9]$/.test(e.key)) {
-        const buttons = optionsEl.querySelectorAll('button');
-        const index = parseInt(e.key, 10) - 1;
-        if (buttons[index]) {
-          buttons[index].click();
+    ThaiQuiz.setupQuiz({
+      elements: { symbol: 'symbol', options: 'options', feedback: 'feedback', nextBtn: 'nextBtn', stats: 'stats' },
+      pickRound: (state) => {
+        const answer = data[Math.floor(Math.random() * data.length)];
+        const choices = [answer];
+        const numChoices = state.correctAnswers >= 30 ? 6 : 4;
+        while (choices.length < numChoices) {
+          const rand = data[Math.floor(Math.random() * data.length)];
+          if (!choices.find(c => c.name === rand.name)) choices.push(rand);
         }
-      } else if (e.key === 'Enter' && nextBtn.style.display !== 'none') {
-        nextBtn.click();
-      }
+        return { answer, choices };
+      },
+      renderSymbol: (answer, els) => {
+        els.symbolEl.textContent = answer.symbol;
+        els.symbolEl.setAttribute('aria-label', `Thai consonant symbol: ${answer.symbol}`);
+      },
+      renderButtonContent: (choice, state) => {
+        const hideEmojis = state.correctAnswers >= 50;
+        return hideEmojis ? `${choice.name}` : `<span class="emoji">${choice.emoji}</span> ${choice.name}`;
+      },
+      ariaLabelForChoice: (choice) => `Answer: ${choice.name} (${choice.meaning})`,
+      decorateButton: (btn, choice) => { btn.classList.add(`${choice.class}-class`); },
+      isCorrect: (choice, answer) => choice.name === answer.name
     });
-
-    nextBtn.onclick = pickQuestion;
-
-    // Initialize
-    pickQuestion();
-    updateStats();
   </script>
 </body>
 </html>

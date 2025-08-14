@@ -18,6 +18,7 @@
     <a href="index.html" class="back-btn">← Back to Home</a>
   </div>
 
+  <script src="quiz.js"></script>
   <script>
     const baseColors = JSON.parse(`[
       {"english":"white","thai":"สีขาว","phonetic":"sǐi khǎaw","hex":"#ecf0f1"},
@@ -39,45 +40,15 @@
       {"english":"dark","thai":"เข้ม","phonetic":"khêm"}
     ]`);
 
-    const symbolEl = document.getElementById('symbol');
-    const optionsEl = document.getElementById('options');
-    const feedbackEl = document.getElementById('feedback');
-    const nextBtn = document.getElementById('nextBtn');
-    const statsEl = document.getElementById('stats');
-
-    let currentAnswer = null;
-    let questionsAnswered = 0;
-    let correctAnswers = 0;
-
-    function shuffle(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
-    function updateStats() {
-      const accuracy = questionsAnswered > 0 ? Math.round((correctAnswers / questionsAnswered) * 100) : 0;
-      statsEl.textContent = `Questions: ${questionsAnswered} | Correct: ${correctAnswers} | Accuracy: ${accuracy}%`;
-    }
-
-    // Color utilities to lighten/darken based on modifier
     function hexToRgb(hex) {
       const h = hex.replace('#', '');
       const bigint = parseInt(h, 16);
-      return {
-        r: (bigint >> 16) & 255,
-        g: (bigint >> 8) & 255,
-        b: bigint & 255
-      };
+      return { r: (bigint >> 16) & 255, g: (bigint >> 8) & 255, b: bigint & 255 };
     }
-
     function rgbToHex(r, g, b) {
       const toHex = (x) => x.toString(16).padStart(2, '0');
       return `#${toHex(Math.max(0, Math.min(255, Math.round(r))))}${toHex(Math.max(0, Math.min(255, Math.round(g))))}${toHex(Math.max(0, Math.min(255, Math.round(b))))}`;
     }
-
     function rgbToHsl(r, g, b) {
       r /= 255; g /= 255; b /= 255;
       const max = Math.max(r, g, b), min = Math.min(r, g, b);
@@ -95,7 +66,6 @@
       }
       return { h, s, l };
     }
-
     function hslToRgb(h, s, l) {
       let r, g, b;
       if (s === 0) { r = g = b = l; }
@@ -116,7 +86,6 @@
       }
       return { r: r * 255, g: g * 255, b: b * 255 };
     }
-
     function adjustLightness(hex, delta) {
       const { r, g, b } = hexToRgb(hex);
       const { h, s, l } = rgbToHsl(r, g, b);
@@ -124,14 +93,12 @@
       const { r: nr, g: ng, b: nb } = hslToRgb(h, s, newL);
       return rgbToHex(nr, ng, nb);
     }
-
     function getDisplayHex(baseHex, modifier) {
       if (!modifier) return baseHex;
       if (/^light$/i.test(modifier.english)) return adjustLightness(baseHex, 0.25);
       if (/^dark$/i.test(modifier.english)) return adjustLightness(baseHex, -0.25);
       return baseHex;
     }
-
     function buildColorPhrase(base, maybeModifier) {
       const hasBuiltInShade = /(^|\s)(dark|light)\s/i.test(base.english);
       const useModifier = !!maybeModifier && !hasBuiltInShade;
@@ -142,67 +109,25 @@
       return { english, thai, phonetic, hex };
     }
 
-    function pickQuestion() {
-      feedbackEl.textContent = "";
-      nextBtn.style.display = "none";
-      optionsEl.innerHTML = "";
-
-      const base = baseColors[Math.floor(Math.random() * baseColors.length)];
-      const maybeModifier = Math.random() < 0.55 ? modifiers[Math.floor(Math.random() * modifiers.length)] : null;
-      const answer = buildColorPhrase(base, maybeModifier);
-      currentAnswer = answer;
-
-      const choices = [answer];
-      while (choices.length < 4) {
-        const b = baseColors[Math.floor(Math.random() * baseColors.length)];
-        const m = Math.random() < 0.45 ? modifiers[Math.floor(Math.random() * modifiers.length)] : null;
-        const choice = buildColorPhrase(b, m);
-        if (!choices.find(c => c.phonetic === choice.phonetic)) {
-          choices.push(choice);
+    ThaiQuiz.setupQuiz({
+      elements: { symbol: 'symbol', options: 'options', feedback: 'feedback', nextBtn: 'nextBtn', stats: 'stats' },
+      pickRound: () => {
+        const base = baseColors[Math.floor(Math.random() * baseColors.length)];
+        const maybeModifier = Math.random() < 0.55 ? modifiers[Math.floor(Math.random() * modifiers.length)] : null;
+        const answer = buildColorPhrase(base, maybeModifier);
+        const choices = [answer];
+        while (choices.length < 4) {
+          const b = baseColors[Math.floor(Math.random() * baseColors.length)];
+          const m = Math.random() < 0.45 ? modifiers[Math.floor(Math.random() * modifiers.length)] : null;
+          const choice = buildColorPhrase(b, m);
+          if (!choices.find(c => c.phonetic === choice.phonetic)) choices.push(choice);
         }
-      }
-
-      shuffle(choices);
-      symbolEl.textContent = answer.thai;
-      symbolEl.setAttribute('aria-label', `Thai color phrase: ${answer.thai}`);
-      symbolEl.style.color = answer.hex;
-
-      choices.forEach(choice => {
-        const btn = document.createElement('button');
-        btn.textContent = choice.phonetic;
-        btn.setAttribute('aria-label', `Answer: ${choice.phonetic}`);
-        btn.onclick = () => {
-          questionsAnswered++;
-          if (choice.phonetic === answer.phonetic) {
-            correctAnswers++;
-            feedbackEl.textContent = "✅ Correct!";
-            nextBtn.style.display = "inline-block";
-          } else {
-            feedbackEl.textContent = "❌ Try again!";
-          }
-          updateStats();
-        };
-        optionsEl.appendChild(btn);
-      });
-    }
-
-    document.addEventListener('keydown', (e) => {
-      if (/^[1-9]$/.test(e.key)) {
-        const buttons = optionsEl.querySelectorAll('button');
-        const index = parseInt(e.key, 10) - 1;
-        if (buttons[index]) {
-          buttons[index].click();
-        }
-      } else if (e.key === 'Enter' && nextBtn.style.display !== 'none') {
-        nextBtn.click();
-      }
+        return { answer, choices, symbolText: answer.thai, symbolStyle: { color: answer.hex }, symbolAriaLabel: `Thai color phrase: ${answer.thai}` };
+      },
+      renderButtonContent: (choice) => choice.phonetic,
+      ariaLabelForChoice: (choice) => `Answer: ${choice.phonetic}`,
+      isCorrect: (choice, answer) => choice.phonetic === answer.phonetic
     });
-
-    nextBtn.onclick = pickQuestion;
-
-    // Initialize
-    pickQuestion();
-    updateStats();
   </script>
 </body>
 </html>
